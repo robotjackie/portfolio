@@ -5,16 +5,26 @@ url: index.html
 image: http://unsplash.it/400?random
 ---
 
-## Overview
-Lorem ipsum dolor sit amet, purto tota in vel, exerci discere apeirian has in. Nec noster iracundia eu, utroque facilis ad has. Alii argumentum no his, omnis iusto scripta vim in, ipsum ridens mel at. Has homero phaedrum no, ea autem affert facilis usu, has possim meliore perpetua id. Errem iisque mea ex, option ocurreret no est. Sea facer ullamcorper ne, cu dictas discere repudiandae sea.
+## Hi! I'm Jackie Wu.
+I'm an entrepreneurial student. I'm building a robotics company with my friends. We hope to put our products in many homes across the world, and in most homes in America. We hope our products can help businesses and governments too.
 
-His nemore audiam consequat ad, no augue choro assueverit mei. Zril offendit tincidunt ne quo. At commodo integre alienum sea, cu vocent fuisset suscipit nam. Eum ex tation omnesque adversarium, mutat autem putant te nam. Id vix facilis complectitur, vis vitae vivendo euripidis ea, fugit eirmod an vix.
+The key questions we ask are, How can new technology improve our lives and transform daily tasks or experiences, to move ourselves along the dialectic of progress? Which of these ideas do we have the ability to execute on? How can we differentiate ourselves from other implementations, in a fun and memorable way? And how can we build a profitable, sustainable organization around them?
 
-Ad case nemore equidem mea. Duo te iuvaret appetere appellantur, sint scaevola usu cu. Eum ne aeque ridens prompta. At legendos vulputate eos, pro illum iuvaret cu, ludus vituperata usu no.
+My long-term goal is to build economies around new technologies to lift developing communities out of poverty. I believe in holistic development. But to get there, I want experience in the trenches building my own companies (and dealing with government) first.
 
-Mel magna discere in. Mea ea dicit homero perfecto. Eam nulla facete scribentur in. Vide volutpat laboramus est cu, usu cu impetus dignissim. Ex pro decore impetus. Ius nihil iisque deterruisset an, ex sanctus verterem his. Doming prompta insolens est ut.
+This sounds too serious but I'm actually a pretty laid-back and goofy guy. To relax I like to draw and read a lot of manga. Hmm, maybe I'll be a manga artist one day. I also regularly make messes in my girlfriend's clean and tidy apartment.
 
-### Research interests
-* Interest 1
-* Interest 2
-* Interest 3
+Feel free to reach out to me - my info is in the Contacts tab.
+
+### Areas of interest
+* Embedded consumer devices
+* Corporate/government robotic solutions
+* Smart apps/"AI" apps
+* Asian/Asian American issues
+* Not agreeing with what most people say
+
+### Areas of no interest
+* Bio-anything - medical devices, drugs, prosthetics etc.
+* Efficient markets or industries
+* Zero-sum / non-value creating endeavors
+* Insularity
