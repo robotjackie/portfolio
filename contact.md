@@ -5,11 +5,13 @@ url: index.html
 image: http://unsplash.it/400?random
 ---
 
-## Quick Spiel
-Lorem ipsum dolor sit amet, tota primis copiosae id quo. Melius eligendi elaboraret pri et, eam menandri platonem te. Tollit iudicabit gloriatur per ad. Ad diceret recteque eum, eu commodo petentium qui. No aliquid delectus eam, dicta eripuit convenire te nec. Vix no veritus dignissim. Erat ferri veniam ut eos, pro ex eius error intellegat, his te graecis oporteat honestatis.
+If you would like to get in touch with me regarding possible partnerships, investments, or media inquiries, please reach out to me below.
 
-* Phone: (123) 456-7890
-* Email: youremail@youremail.com
-* Address: 2145 Sheridan Rd., Evanston, IL, 60201
+* Phone: (512) 573-909 one
+* Email: jwu @ u.northwestern.edu
 
-Ad case nemore equidem mea. Duo te iuvaret appetere appellantur, sint scaevola usu cu. Eum ne aeque ridens prompta. At legendos vulputate eos, pro illum iuvaret cu, ludus vituperata usu no.
+If you're in Chicagoland, feel free to drop by Evanston for a coffee or beer!
+
+<b>Please do not solicit or advertise me about unrelated products or services, thanks.</b>
+
+
