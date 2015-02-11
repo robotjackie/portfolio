@@ -12,7 +12,7 @@ The key questions we ask are, How can new technology improve our lives and trans
 
 My long-term goal is to build economies around new technologies to lift developing communities out of poverty. I believe in holistic development. But to get there, I want experience in the trenches building my own companies (and dealing with government) first.
 
-This sounds too serious but I'm actually a pretty laid-back and goofy guy. To relax I like to draw and read a lot of manga. Hmm, maybe I'll be a manga artist one day. I also regularly make messes in my girlfriend's clean and tidy apartment.
+This sounds too serious but I'm actually a pretty laid-back and goofy guy. To relax I like to draw and read a lot of manga. Hmm, maybe I'll be a manga artist one day. I also like bathing, boxing, and regularly making messes in my girlfriend's clean apartment.
 
 Feel free to reach out to me - my info is in the Contacts tab.
 
