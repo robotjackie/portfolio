@@ -1,6 +1,6 @@
 # Site settings
 title:              Portfolio Template
-email:              your-email@domain.com
+email:              jwu@u.northwestern.edu
 description:        "Portfolio template for students in the MSR program at Northwestern University"
 url:                "http://localhost:4000"
 baseurl:            /portfolio

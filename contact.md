@@ -2,7 +2,7 @@
 layout: contact
 path: /contact
 url: index.html
-image: http://unsplash.it/400?random
+image: jackie_contact.jpg
 ---
 
 If you would like to get in touch with me regarding possible partnerships, investments, or media inquiries, please reach out to me below.

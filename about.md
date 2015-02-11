@@ -2,7 +2,7 @@
 layout: about
 path: /about
 url: index.html
-image: http://unsplash.it/400?random
+image: jackie_profile.jpg
 ---
 
 ## Hi! I'm Jackie Wu.
