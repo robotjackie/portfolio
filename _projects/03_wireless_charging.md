@@ -18,43 +18,46 @@ I was lucky enough to be accepted into the Masters in Robotics program with Todd
 
 ## General Approach
 
-My friend Ritwik Ummalaneni and I combined an off-the-shelf drone, controllable by PC, with a remote camera transmitter and an inductive charging unit. 
+In order to get this to work, we wanted to do the minimum necessary to prove a concept, and not reinvent the wheel from scratch. My friend Ritwik Ummalaneni and I combined an off-the-shelf drone, controllable by PC, with a remote camera transmitter and an inductive charging unit. 
 
-We did this project using:
+We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
+
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true"  width="400"></center>
 
 
-- [1 gram camera + transmission module](http://www.fpvhobby.com/143-sub-nano-combo-set.html)
+- Camera and transmitter: [1 gram camera + transmission module](http://www.fpvhobby.com/143-sub-nano-combo-set.html)
 
 This was sold as the lightest camera + transmitter combo in the world by Chinese manufacturers, with an odd camera resolution (something like PAL 720x576).
-<center><img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="500"></center>
+<center><img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="300"></center>
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/palm_charger.jpg?raw=true" width="400"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/palm_charger.jpg?raw=true" width="300"></center>
 
 
 ## Challenges
-The "sub-nano camera module" was quite small, and as you can imagine, soldering was difficult since the pins were so close to each other. 
-
-In addition, we needed a TV receiver in order to display the image. As a follow-up, one could buy a USB dongle to get images onto the computer and do image processing on the video stream.
+We ran into a few difficulties in the project, but generally were able to get things to work. The "sub-nano camera module" was quite small, and as you can imagine, soldering was a bit difficult since the pins were so close to each other. 
 
 The two components connect with 3 wires, GND, 3V3, and the video data wire. The GND and 3V3 cables could then be connected to another power source such as pins on an Arduino. An antenna could also be added, and the whole thing could be heat-shrinked with a plastic wrap that came with the shipment (we didn't bother).
 
-<img src="http://www.fpvhobby.com/img/p/143-354-thickbox.jpg" width="250"><img src="http://www.fpvhobby.com/img/p/143-380-thickbox.jpg" width="250">
+<center><img src="http://www.fpvhobby.com/img/p/143-354-thickbox.jpg" width="250"><img src="http://www.fpvhobby.com/img/p/143-380-thickbox.jpg" width="250"></center>
 
-Unfortunately, as we played with the drone, the charging chip on the inductive coils broke: 
+In addition, we needed a TV antenna receiver in order to display the image. As a follow-up, one could buy a USB dongle to receive and transfer the images onto the computer in order to do image processing on the video stream.
+
+The inductive charger has some sort of microcontroller presumably to regulate charging. Unfortunately, near the end of our project, the charging chip on the inductive coils broke: 
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie_broken.jpg?raw=true" alt="Broken charging chip" width="400"></center>
 
-One could solve this by buying the actual [Crazyflie inductive charging coils expansion board](http://www.seeedstudio.com/depot/Crazyflie-20-Qi-inductive-charging-expansion-board-p-2112.html), or just the [inductive charging coils](http://www.digikey.com/product-search/en/inductors-coils-chokes/wireless-charging-coils/197928?WT.srch=1) from a distributor.
+One could solve this by buying the official [Crazyflie inductive charging coils expansion board](http://www.seeedstudio.com/depot/Crazyflie-20-Qi-inductive-charging-expansion-board-p-2112.html), or just the [inductive charging coils](http://www.digikey.com/product-search/en/inductors-coils-chokes/wireless-charging-coils/197928?WT.srch=1) from a distributor and creating one's own PCB to address charging.
 
-The last challenge was that the Crazyflie couldn't fly while charging. This setting makes sense as usually the mini-drone charges via USB, and there is no reason for it to need to fly while connected with a USB cable. As a follow-up, one could modify the open-source code for the Crazyflie to change this option.
+The last challenge was that the Crazyflie couldn't fly while charging. This is a setting in the code that makes sense, as usually the mini-drone charges via USB, and there is no reason for it to need to fly while connected with a USB cable. As a follow-up, one could modify the open-source code for the Crazyflie to change this option so that the drone can take off directly from the charging pad.
 
 
 ## Sources
 (1) Tutorial: [https://www.bitcraze.io/2012/09/inductive-charging-hack/](https://www.bitcraze.io/2012/09/inductive-charging-hack/)
+
 (2) Palm charger teardown tutorial: [https://www.ifixit.com/Teardown/Palm-Touchstone-Charger-Teardown/810/1](https://www.ifixit.com/Teardown/Palm-Touchstone-Charger-Teardown/810/1)
-(3) Crazyflie code: [https://github.com/bitcraze/crazyflie-firmware](https://github.com/bitcraze/crazyflie-firmware)
+
+(3) Crazyflie firmware code: [https://github.com/bitcraze/crazyflie-firmware](https://github.com/bitcraze/crazyflie-firmware)
 
