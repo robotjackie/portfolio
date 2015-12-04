@@ -2,7 +2,7 @@
 layout: project
 title: Haptics device research
 date: February 20, 2015
-image: haptics.jpg
+image: image_recog1.jpg
 ---
 
 ## Overview
