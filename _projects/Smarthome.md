@@ -15,7 +15,7 @@ To gain experience in this area, my classmate Akshat Thirani and I worked togeth
 
 We placed these motes in different parts of the house to simulate different conditions (e.g. a mote in the fridge to detect temperature, opening/closing the window shades to simulate day and night). We also demonstrated that these motes could communicate to each other through a sensor network and trigger events based on their sensor readings, to blink lights based on sensor data.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true" width=400></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true" width="300"></center>
 
 ## General Approach and Results
 The TelosB motes run on an "operating system" for low-powered, embedded devices called *TinyOS*. It has drivers and libraries for microcontrollers, sensors, timers, radio communication, and other integrated chips for different embedded devices. 
@@ -24,7 +24,7 @@ It is written in nesC, a dialect of C, and firmware comprises a .nc main file, .
 
 Our project was to design and program a TinyOS application to run on two TelosB motes, utilizing the built-in light, temperature, and humidity sensors to provide real-time notifications, and “display” the notification on the on-board available LEDs. In addition, one mote would transmit temperature data from its sensor to the other, and the second mote would transfer light data to the first, triggering the blinking of different LEDs. While we used 2 motes, our code could be expanded to include more motes for more sensors or event triggers.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote_description.JPG?raw=true" width=400></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote_description.JPG?raw=true" width="300"></center>
 
 
 ### Method
