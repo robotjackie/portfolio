@@ -15,7 +15,7 @@ To gain experience in this area, my classmate Akshat Thirani and I worked togeth
 
 We placed these motes in different parts of the house to simulate different conditions (e.g. a mote in the fridge to detect temperature, opening/closing the window shades to simulate day and night). We also demonstrated that these motes could communicate to each other through a sensor network and trigger events based on their sensor readings, to blink lights based on sensor data.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true" width="300"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true" alt="Example of a TelosB mote" width="350"></center>
 
 ## General Approach and Results
 The TelosB motes run on an "operating system" for low-powered, embedded devices called *TinyOS*. It has drivers and libraries for microcontrollers, sensors, timers, radio communication, and other integrated chips for different embedded devices. 
@@ -24,7 +24,7 @@ It is written in nesC, a dialect of C, and firmware comprises a .nc main file, .
 
 Our project was to design and program a TinyOS application to run on two TelosB motes, utilizing the built-in light, temperature, and humidity sensors to provide real-time notifications, and “display” the notification on the on-board available LEDs. In addition, one mote would transmit temperature data from its sensor to the other, and the second mote would transfer light data to the first, triggering the blinking of different LEDs. While we used 2 motes, our code could be expanded to include more motes for more sensors or event triggers.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote_description.JPG?raw=true" width="300"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote_description.JPG?raw=true" width="450"></center>
 
 
 ### Method
@@ -33,12 +33,12 @@ The code is written in *nesC*. It reminded me of Arduino code, with separate "co
 We wrote code for separate sensor modules, splitting up temperature, light, and humidity across the two modules. Then we added events for when the radio listening for the other motes' sensor data received a packet, and wrote conditional functions to blink LEDs in certain cases. We defined packets as new data types. Given how simple our example was, we didn't see the need for ACK bits or checksums. Since we had only 2 motes, we didn't using any routing algorithms or addressing, but these could be future projects. 
 
 ### Installation
-[http://tinyos.stanford.edu/tinyos-wiki/index.php/Automatic_installation]
+[http://tinyos.stanford.edu/tinyos-wiki/index.php/Automatic_installation](http://tinyos.stanford.edu/tinyos-wiki/index.php/Automatic_installation)
 
 Note: TinyOS only offered support up to 12.04 (natty) and only supported 32-bit libraries. I had trouble installing several key libraries on Ubuntu 14.04.
 
 ### Getting Started and Compiling
-[http://tinyos.stanford.edu/tinyos-wiki/index.php/The_simplest_TinyOS_program]
+[http://tinyos.stanford.edu/tinyos-wiki/index.php/The_simplest_TinyOS_program](http://tinyos.stanford.edu/tinyos-wiki/index.php/The_simplest_TinyOS_program)
 
 ### Debugging
 To test code, the TelosB motes had several LEDs to blink. You can also debug by printing to Serial for a USB-connected mote.
@@ -50,11 +50,11 @@ In the future, more complex applications could be triggered by sensor data, such
 
 
 ### Sources
-(1) TinyOS Wiki: [http://tinyos.stanford.edu/tinyos-wiki/index.php/Main_Page]
+(1) TinyOS Wiki: [http://tinyos.stanford.edu/tinyos-wiki/index.php/Main_Page](http://tinyos.stanford.edu/tinyos-wiki/index.php/Main_Page)
 
-(2) Tutorials: [http://www.tinyos.net/tinyos-1.x/doc/tutorial/]
+(2) Tutorials: [http://www.tinyos.net/tinyos-1.x/doc/tutorial/](http://www.tinyos.net/tinyos-1.x/doc/tutorial/)
 
-(3) 130+ pg book on TinyOS and programming: [http://www.tinyos.net/tinyos-2.x/doc/pdf/tinyos-programming.pdf]
+(3) 130+ pg book on TinyOS and programming: [http://www.tinyos.net/tinyos-2.x/doc/pdf/tinyos-programming.pdf](http://www.tinyos.net/tinyos-2.x/doc/pdf/tinyos-programming.pdf)
 
-(4) Washington-St.Louis tutorial: [http://www.wsnmagazine.com/TinyOS%20tutorial.pdf]
+(4) Washington-St.Louis tutorial: [http://www.wsnmagazine.com/TinyOS%20tutorial.pdf](http://www.wsnmagazine.com/TinyOS%20tutorial.pdf)
 
