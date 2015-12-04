@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Haptics device research
+title: Image Recognition and Classification App
 date: February 20, 2015
 image: image_recog1.jpg
 ---

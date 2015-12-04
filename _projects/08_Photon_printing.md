@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Haptics device research
+title: Photon Web Printing Project
 date: February 20, 2015
 image: 
 ---
