@@ -1,8 +1,8 @@
 ---
 layout: project
-title: Haptics device research
+title: Microcontroller Security Camera Project
 date: February 20, 2015
-image: haptics.jpg
+image: microchip_back.jpg
 ---
 
 ## Overview

@@ -24,7 +24,7 @@ We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true"  width="400"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true alt="Our Crazyflie in the Robotics lab"  width="400"></center>
 
 
 - Camera and transmitter: [1 gram camera + transmission module](http://www.fpvhobby.com/143-sub-nano-combo-set.html)
