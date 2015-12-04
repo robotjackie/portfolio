@@ -12,17 +12,13 @@ image: project_smarthome.jpg
 *** blah blah blah smarthome, light, humidity, temperature
 communicate to each other - sensor networks
 
-![The TelosB mote](https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true)
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true"></center>
 
 ## General Approach
 Our task was is to design and program a TinyOS application to run on two TelosB motes, utilizing the built-in light, temperature, and humidity sensors to provide real-time notifications and “display” the notification on the on-board available LEDs. In addition, temperature sensors would transmit the data from one mote to another, and the second mote would transfer light data to the first, blinking on and off different LEDs.
 
-![The TelosB mote](portfolio/tree/gh-pages/public/images/tiny_mote_description.jpg)
-![The TelosB mote](tree/gh-pages/public/images/tiny_mote_description.jpg)
-![The TelosB mote](gh-pages/public/images/tiny_mote_description.jpg)
-![The TelosB mote](public/images/tiny_mote_description.jpg)
-![The TelosB mote](images/tiny_mote_description.jpg)
-![The TelosB mote](tiny_mote_description.jpg)
+<center><img src="https://github.com/robotjackie/portfolio/tree/gh-pages/public/images/tiny_mote_description.jpg"></center>
+
 
 ### Method
 nesC
