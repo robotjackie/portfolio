@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Security Camera Networking
+title: Security Camera Networking Project
 date: February 20, 2015
 image: microchip_back.jpg
 ---

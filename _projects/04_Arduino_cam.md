@@ -5,16 +5,16 @@ date: February 20, 2015
 image: mega2560_ov7670_side.jpg
 ---
 ### STATUS: Not maintained. 
-Please don't contact me about this project. Unless you know how to get it to work better.
+Please don't contact me about this project, unless you know how to get it to work better.
 
 ## Overview
-For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect blobs. I partially succeeded in that I could detect the locations of blobs of light, but I was not successful in getting quality images or video stream from the camera.
+For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect blobs. I partially succeeded in that I could detect blobs of light, but I was not successful in getting quality images or video stream from the camera.
 
 <center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
 
-The Omnivision OV7670 camera is a cheap, mobile-phone quality CMOS camera that in bulk sells for under $5 from Chinese suppliers on Alibaba. The camera is supposed to be able to do VGA 640x480 resolution video streaming at 30 fps. It comes in 2 forms: with a memory chip or without. It also comes in different form factors in the number of pins: 18, 20, 22, and 24 pins. 
+The Omnivision OV7670 camera is a cheap, mobile-phone quality CMOS camera that in bulk sells for under $5 from Chinese suppliers on Alibaba. The camera is supposed to be able to stream VGA 640x480 resolution video at 30 frames per second. There are different libraries and projects written online to interface this camera with various microcontrollers, including Arduinos. The camera can take 3.3V input, and some online claim that 5V input may burn the image sensors.
 
-In the States, one can buy a PCB module for this camera for $8-25 on [Amazon](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dphoto&field-keywords=ov7670+fifo). The module is 3.5mm x 3.5mm x 3mm deep. This module breaks out and labels the camera's pins to male headers that can be soldered, or plugged into female/male ports for breadboarding. In addition, the module comes with a case that is much larger than the actual camera itself, which has a camera cap. 
+In the States, one can buy a PCB module for this camera for $8-25 on [Amazon](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dphoto&field-keywords=ov7670+fifo) that is is 3.5mm x 3.5mm x 3mm deep. The module comes in 2 forms: with a memory chip or without. It also comes in different form factors in the number of pins: 18, 20, 22, and 24 pins. This module breaks out and labels the camera's pins to male headers that can be soldered, or plugged into female/male ports for breadboarding. In addition, the module comes with a case that is much larger than the actual camera itself, with a removable camera cap. One can manually adjust the focus of the camera by screwing it left/right. 
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="250"></center>
 
@@ -26,39 +26,44 @@ To determine whether the OV7670 camera module has a memory chip or not, turn it 
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300"></center>
 
-The one with a memory chip (ALB422) has enough space to store 1 image in YUV image format, at 2 bytes/pixel. It then allows the image to be read off 8 parallel data pins. The camera can take 3.3V input, and some online claim that 5V input may burn the image sensors.
+The one with a memory chip (ALB422) has enough space to store 1 image in YUV image format, at 2 bytes/pixel (more on YUV image format below, under "Image color formats"). The module then allows the image to be read from the memory chip off 8 parallel data pins. 
 
-One can manually adjust the focus of the camera by screwing it left/right. In addition, in the case of manufacturing, the bare camera often comes with "Golden Finger" connections, and without the case of the module, the form factor is quite small:
+This camera module makes prototyping with the camera quite easy. But in the case of manufacturing, the bare camera often comes with "Golden Finger" connections for each pin. Without the bulky case of the module, the form factor for the actual camera is quite small:
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.jpg" width="300"></center>
 
 
 ## Implementation
-I tried various microcontrollers with the OV7670 with FIFO, including different Arduinos and Arduino clones (Nano, Mega2560, Mega clone, Pro Mini), and a [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with built-in WiFi and online IDE). 
+I tried various microcontrollers with the OV7670 with FIFO, including different Arduinos and Arduino clones:
+- Nano
+- Mega2560
+- Mega clone
+- Pro Mini)
+- [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with built-in WiFi and online IDE). 
 
-I bought many of my Arduino clones from [ValueHobby - which has very cheap Arduino clones and other electronic components](www.valuehobby.com/arduino-and-cnc.html), for $2-3, in Chicago. It has standard ground shipping, but I couldn't wait so I drove 40 minutes to their warehouse by O'Hare Airport to pick up my cheap electronics the day I ordered them.
+I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), which has very cheap Arduino clones and other electronic components in the $2-5 range, located in Chicago. ValueHobby has standard ground shipping, but I couldn't wait so I drove 40 minutes to their warehouse by O'Hare Airport to pick up my cheap electronics the day I ordered them.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="400"></center>
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="400"></center>
 
-Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera with Arduino Mega2560. This can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. This book contains a library for the register settings to make the camera work, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in Sources below.
+Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. This book contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "Sources" below.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
 
-I also heavily leaned on code from a repo called Arduvision (see Sources below). It is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and with an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
+I also heavily leaned on code from a repo called Arduvision (see "Sources" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
-Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I worked with my classmate Athulya Simon who tried to get the OV7670 + FIFO camera to work with a PIC32MX microcontroller to drive a robotic car.
+Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car.
 
 ## Technical Details
 
 #### Camera components:
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true" width="800"></center>
 
 
 #### Pins: 
 
-
+(From electrodragon - see "Sources" at end)
 - 3V3 ----- input supply voltage (3V3)
 - GDN ----- ground
 - SIO_C --- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR)
@@ -73,8 +78,6 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 - FIFO_OE ---- FIFO off control (connect to GROUND RAIL)
 - FIFO_WRST-FIFO write pointer reset terminal
 - FIFO_RRST-FIFO read pointer reset terminal
-
-(From electrodragon - see Sources at end)
 
 Pin connections:
 
