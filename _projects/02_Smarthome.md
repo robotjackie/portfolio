@@ -32,17 +32,15 @@ Our project was to design and program a TinyOS application to run on two TelosB 
 
 We wrote code for two separate sensor modules, splitting up temperature, light, and humidity across them. Then we added events for when the radio listening for the other motes' sensor data received a payload packet, and wrote conditional functions to blink LEDs. We defined packets as new data types containing the sensor information. Given the straightforward nature of our example, we didn't use ACK bits or checksums, but they would be straightforward to implement with the radio component function. Since we had only 2 motes, we also didn't using any routing algorithms or addressing, but these could be implemented in future projects. 
 
+<br/>
+
 ### Installation
 [http://tinyos.stanford.edu/tinyos-wiki/index.php/Automatic_installation](http://tinyos.stanford.edu/tinyos-wiki/index.php/Automatic_installation)
 
 Note: TinyOS only offered support up to 12.04 (natty) and only supported 32-bit libraries. I had trouble installing several key libraries on Ubuntu 14.04.
 
-<br/>
-
 ### Getting Started and Compiling
 [http://tinyos.stanford.edu/tinyos-wiki/index.php/The_simplest_TinyOS_program](http://tinyos.stanford.edu/tinyos-wiki/index.php/The_simplest_TinyOS_program)
-
-<br/>
 
 ### Debugging
 To test code, the TelosB motes had several LEDs to blink. You can also debug by printing to Serial for a USB-connected mote.
