@@ -5,8 +5,9 @@ date: February 20, 2015
 image: nRF_arduino.jpg
 ---
 
-## Overview
-For Haptics class, we culminated with a project using a novel haptic feedback device prototype to test human responses with finger and a stylus. This has implications for next generation haptic touchscreens, for smartphones, tablets, and computers, and another method of interacting with the digital world in the field of human-computer interaction.
+## Summary
+In this project, I was able to use an Arduino connected to a radio chip to bind and control an RC hobbyist drone. 
 
-### Details
-More details soon...
+After an initialization sequence packet, I could control the drone through my computer, by sending thrust/roll/pitch/yaw commands in the data payload, in a packet with headers and checksums.
+
+

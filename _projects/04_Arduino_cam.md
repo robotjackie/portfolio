@@ -5,6 +5,7 @@ date: February 20, 2015
 image: mega2560_ov7670_side.jpg
 ---
 ### STATUS: Not maintained. 
+
 #### Please don't contact me about this project, unless you know how to make it work better.
 
 <br/>
@@ -71,7 +72,7 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 #### Camera components:
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true" width="800"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true" width="650"></center>
 
 
 #### Pins: 
@@ -112,13 +113,19 @@ Pin connections:
 
 With Arduino Pro Mini
 doesn't use all the data pins
-<center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="600"></center>
+<center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="800"></center>
 
 <br/>
 
 #### Timing diagrams:
 
-<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700"><img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
+<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700">
+
+<br/>
+
+<img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
+
+<br/>
 
 #### Image color formats
 The formats used by the OV7670 are the RGB565, RGB555 and RGB444
@@ -138,6 +145,8 @@ The main two that I used are from the book "Beginning OV7670 with Arduino," and 
 
 At first I only got garbage. It looked like part of the image was being read and sent correctly, but perhaps the timing was off. Some of this was resolved by decreasing the baud rate to Serial, and also by re-wiring the connections more accurately and with shorter wires.
 
+<br/>
+
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="500"></center>
 
 <br/>
@@ -150,9 +159,9 @@ Luckily, the light blob detection from the Arduvision library worked. It refresh
 
 <br/>
 
-However, the code from the _Beginning OV7670 with Arduino_ book did not work well. There were many problems (listed below in "Challenges"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) 
+However, the code from the _Beginning OV7670 with Arduino_ book did not work well. There were many problems (listed below in "Challenges"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. 
 
-As you can see it is quite blurry. I tried manually changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library. I couldn't figure out why it didn't give me quality camera feed.
+Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) As you can see it is quite blurry. I tried manually changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library. I couldn't figure out why it didn't give me quality camera feed.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA0.jpg" width="450">
 <img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA1.jpg" width="450">
@@ -161,6 +170,8 @@ As you can see it is quite blurry. I tried manually changing the focus, with lit
 <br/>
 
 #### Output format: YUV 
+
+<br/>
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
@@ -172,7 +183,7 @@ so each 2-byte word is one pixel, which is what we expected.
 
 ## Challenges
 
-- BE careful: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
+- Be careful: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
 - Data sheet for pins may be different
 
