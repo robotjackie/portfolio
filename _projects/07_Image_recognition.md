@@ -16,21 +16,12 @@ I worked on this with Shayne Hemminger, Adi Dhingra, and Jon Tan for WildHacks 2
 
 We were not able to get the microcontroller + WiFi chip that we used, the Particle Photon, to work with the OV7670 camera (details below, but also see my [Arduino Camera Project](http://robotjackie.github.io/portfolio/projects/04_Arduino_cam/) writeup). We worked around this by using a Nest Camera API to retrieve its video stream to an Android mobile app, as well as using the Android phone's native camera to take a picture. 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/photon_ide.jpg" width="700" alt="UI for the image comparison app"></center>
 
 We then performed image classification by submitting an image to the Cloudsight API, which would then relay a text description of the object it had classified. Then our app performed some simple parsing and comparison to find which images in our "object database" matched the description (for our sake, we used only a collection of different colored "Beats" headphones to match to, but in reality this would be a large collection of images of all sorts of objects in the real world). We did not have time to implement the printing and shipping features unfortunately. 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/image_recog1.jpg" width="600" alt="UI for the image comparison app">
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/image_recog1.jpg" width="800" alt="UI for the image comparison app"></center>
 
-UI for the image comparison app
-</center>
-
-
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/Ben_Hangout.jpg?raw=true" width="450" alt="Example image fed to the app"></center>
-Example image fed to the app
-
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/image_recog3.jpg" width="600" alt="Output for closest image matching from image database"></center>
-Output for closest image matching from image database
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/image_recog3.jpg" width="800" alt="Output for closest image matching from image database"></center>
 
 ## Challenges
 
@@ -40,4 +31,4 @@ We also ran into challenges with the mobile app, in printing a screenshot of the
 
 
 ## Details
-[GitHub repo](https://github.com/AwesomeShayne/CamerAzure/tree/dev).
+[GitHub repo](https://github.com/AwesomeShayne/CamerAzure/tree/dev)
