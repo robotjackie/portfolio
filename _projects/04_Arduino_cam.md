@@ -31,7 +31,7 @@ To determine whether the OV7670 camera module has a memory chip or not, turn it 
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300"></center>
 
-The one with a memory chip (ALB422) has enough space to store 1 image in raw Bayer image format, at 1 byte/pixel (more on YUV image format below, under "Image color formats"). It can hold 384K bytes (while 640px * 480px * 1 byte/px = 307.2K bytes). The module then allows the image to be read from the memory chip off 8 parallel data pins. 
+The one with a memory chip (ALB422) has enough space to store 1 image in raw Bayer image format, at 1 byte/pixel (more on YUV image format below, under "Image color formats"). It can hold 384K bytes (while 640px * 480px * 1 byte/px = 307.2K bytes). The module then allows the image to be read from the memory chip off 8 parallel data pins. I believe more data from a higher quality image can be taken with the camera, but it can't be stored and must be read immediately or the data will be lost. 
 
 This camera module makes prototyping with the camera quite easy. But in the case of manufacturing, the bare camera often comes with "Golden Finger" connections for each pin. Without the bulky case of the module, the form factor for the actual camera is quite small:
 
@@ -64,7 +64,7 @@ Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera
 
 I also heavily leaned on code from a repo called Arduvision (see "Sources" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
-Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car.
+Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car, and had help from Spencer Williams.
 
 <br/>
 
@@ -150,21 +150,21 @@ The image then goes into the FIFO memory buffer (L), which as explained above ca
 
 - SIO_D (aka SIOD) ----- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR)
 
-- VSYNC ----- frame synchronizing signal (output - pulses at beginning and end of each frame)
+- VSYNC ----- frame synchronizing signal (input - pulses at beginning and end of each frame)
 
 - HREF ----- line synchronizing signal (unused)
 
-- D0-D7 ----- data port (output)
+- D0-D7 ----- data port (input)
 
-- WEN (aka WR) ----- write enable
+- WEN (aka WR) ----- write enable to memory (output)
 
-- RST ----- reset port (triggered when LOW)
+- RST ----- reset port (triggered when LOW, output)
 
-- PWDN ----- power selection mode (triggered when HIGH)
+- PWDN ----- power selection mode (triggered when HIGH, output)
 
 - STROBE ----- camera flash control (unused)
 
-- RCK (aka RCLK) ----- FIFO memory read clock control terminal
+- RCK (aka RCLK) ----- FIFO memory read clock control terminal (output)
 
 - OE ---- FIFO off control / "output enable" (connect to GROUND RAIL)
 
@@ -202,26 +202,57 @@ For this example, the Arduino Mega 2560 also is connected to an SD card reader b
 
 ### Timing diagrams:
 
+Here is how the timing works to read image bits from the camera sensor, write them to the FIFO memory chip, and then pull them off of the memory chip onto the microprocessor. This is how it works for one frame.
+
+- At the beginning of the frame, VSYNC is pulsed high, then returns to low. 
+
+- Next, Write Reset must be reset to low to indicate the beginning of the frame.
+
+- Then, Write Enable must be set to high to allow the image to be written to the memory.
+
+- Data bits are written, one by one and line by line, to the memory.
+
+- VSYNC is pulsed high again to signal the end of the frame.
+
+- Finally, Write Enable must be set to low to stop writing any more data to memory.
+
 <center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700">
 
 <br/>
+
+- To read from memory, Read Reset must be reset to low to indicate the beginning of the frame.
+
+- Each clock cycle from RCK reads 1 bit from each of the 8 data ports, meaning up to 1 byte is read in total each cycle. 
 
 <img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
 
 <br/>
 
 ### Image color formats
-The formats used by the OV7670 are the RGB565, RGB555 and RGB444, 
+
+There are several different options for image color formats outputted by the camera. These are versions of RGB, YUV, YCbCr, and raw/processed Bayer. 
+
+The RGB formats used by the OV7670 are the RGB565, RGB555 and RGB444. 
 RGB565 is 5 bits for R, 6 bits for G, and 5 bits for B. So that means Red is split up into 2^5=32 different levels of red, Green into 2^6=64, etc.
 
-In addition there are formats with Yxxxx, such as YCbCr and YUV. 
+In addition there are formats with Y (luminance), such as YCbCr and YUV. In these formats, the Y itself is the black and white version of the image, while the other values add color. The UV from YUV are from a color plane, while CbCr refer to blue and red components. 
+
+The following function can convert YCbCr to RGB:
+
+<center><img src="https://upload.wikimedia.org/wikipedia/en/math/4/e/b/4ebf7992636ec7100e2f0f68a4f2c2ca.png"></center>
+
+Specifically, the OV7670 uses a YCbCr422 format. This is a strange format where 1 byte is given to Y, Cb, and Cr each, which seems like each pixel is 3 bytes. But two consecutive pixels share the same Cb and Cr values. So for two pixels, there is Y1, Y2, Cb1, Cr1, which is 4 bytes per 2 pixels, or an average of 2 bytes/pixel. 
+
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/YCbCr_pixels.jpg?raw=true"></center>
 
 Finally, there is the Raw Bayer formats. The image sensor contains sensors in a BG/GR Bayer filter pattern, with blue and green filters alternating in one row, and green and red in the next. These filters only allow light of that wavelength in. That means that a pixel must fill in the 2 missing colors in an estimating process called "demosaicing" in order to have full color. This outputs the processed Bayer format.
 
 ### Libraries
+
 See "Sources" at bottom for different libraries with different microcontrollers.
 
 The main two that I used are from the book "Beginning OV7670 with Arduino," and the Arduvision library.
+
 <br/>
 
 ## Results
@@ -258,51 +289,50 @@ Below is the image quality from pictures taken with the book's code. (In the rig
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
-2400 lines, each line has 8 words, each word is 4-digit hex. 
-1 hex character is half a byte, so each word is 2 bytes.
-2 bytes * 8 per line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
-so each 2-byte word is one pixel, which is what we expected.
+This was one YUV-format image in QQVGA resolution that was saved to the SD card. 
+
+It is 2400 lines. Each line has 8 "words," with each word a 4-digit hexadecimal.
+
+Since 1 hex character is half a byte, each "word" is 2 bytes.
+
+2 bytes/word * 8 words/line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
+
+This confirms that each "word" was actually a pixel, and each pixel took up 2 bytes, which is what I had set in the code.
 
 
 ## Challenges
 
+- The biggest difficulty was that while I could get light blob detection to work, I couldn't get clear image quality. I tried changing register settings, only reading luminance (black and white), rewriting the code, turning the camera focus knob, trying different code libraries, and switching cameras in case I had a bad camera, without success. I'm not sure why it didn't work and why image quality was so blurry.
+
 - Be careful: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
-- Data sheet for pins may be different
+- Although there are OV7670 cameras with different pin numbers, from 18-24, they seem to all use the same data sheet. If you use anything other than the 24-pin camera, it can seem confusing, but you can just ignore the extra pins.
 
-- Decrease baud rate for Serial
+- One potential problem to be noted is that while the speed from the camera, I2C, and microprocessor clock cycles are fine, the baud rate for Serial transmission to PC may be too high. 
 
 - From the Arduvision blog:
 
-Change the line "static const unsigned long _BAUDRATE = 500000;" in the Arduino code, and the line "public final static int BAUDRATE = 500000;" in the globalDefinitions.java file of the Processing sketch. Try with substituting the 500000 for 115200.
+Change the line "static const unsigned long _BAUDRATE = 500000;" in the Arduino code, and the line "public final static int BAUDRATE = 500000;" in the globalDefinitions.java file of the Processing sketch. Try with substituting the **500000** for **115200**.
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
-- SD card fragile / somewhat broken - used rubber band to hold together. Solved some funny SD card problems, e.g. taking 70 seconds + 0 seconds for 2 images and re-writing old images
-or would work, but take 70 seconds to write 1 image, 0 seconds to write other images. 
-Or would rewrite over old images
+- Some Arduinos are 3.3V while others are 5V. I thought I could use a 5V Arduino but power the camera with the 3V3 pin. However, I2C on a 5V Arduino uses 5V, and low from the Arduino can still pull the camera pins to high. I used 4.7K pull-up resistors for this Arduino. 
 
-tried SD sample code
-shorter wires
-reformatted with FAT32 - 4 GB
-held down with rubber band
-worked
+- I read online that using 5V power may burn the image sensors, so just in case I accidentally did that, I switched with Athulya's camera. It made no difference in image quality.
 
-- code too large for a nano, must use mega
+- Some pins are pull-LOW to activate, while others are pull-HIGH. This is documented in the code libraries, but could be tricky if one is writing the code from scratch and not noticed.
 
-- mega clone failed. could reinstall firmware
+- If you're writing the registers from scratch, the register "0xB0" is listed as "Reserved" in the OV7670 reference documentation. However, an addendum document "OV7670 Software Application Note" specifies that this undocumented register should be set to the value "0x84" for YCbCr. 
 
-- input voltage is wrong - used 4.7K resistors
-switched with Athulya in case camera sensor burned out
+- I solved some other funny SD card problems, such as taking 70 seconds to write one image, then 0 seconds for 2 following images, or re-writing over old images. Then the SD sample code wouldn't run. I tried using shorter wires and reformatting the 4GB SD card with FAT32. It also turned out my SD card reader was fragile / somewhat broken. I used a rubber band to hold it together. 
 
-- some pins are pull-LOW to activate, while others are pull-HIGH. this was tricky if not noticed.
+- Another problem was that the book code too large for an Arduino Nano clone, so I had to switch Arduinos to the Mega 2560 that the book originally listed.
 
-- Photon bug:
-To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Photon (possibly to Safe Mode), and flash code to it
+- My cheap Arduino Mega 2560 clone failed to compile and kept giving me firmware errors. From online advice, I could reinstall the Arduino firmware with dfu-programmer, but decided to just borrow my friend's authentic Mega 2560. This solved the problems.
 
-- Used free software trial of "All to Real Converter Standard" to convert images to JPG.
-Tried many different softwares and online apps, this was the only one that worked, and it was not very convenient. 
-15-day free trial
+- For fun, I used a Particle Photon (basically a WiFi-enabled Arduino) with the camera as well, and was not able to get anything, not even debugging print statements. There is a bug with the Photon where I2C pulled low will not reset itself, which causes the status of the Photon to be stuck always blinking green. It can't seem to do anything in this mode - unable to flash new programs or even connect to the Internet or Serial. To solve the I2C issue, I manually pulled up the Photon I2C pins by holding wires connected to 3V3 to both Photon I2C pins, rebooting the Photon to Safe Mode.
+
+- When YUV-format images were finally pulled from the SD card, we tried many different software and online apps. We finally used a 15-day free trial of software called "All to Real Converter Standard" to convert the images to JPG. This was the only one that worked, and it was not very convenient. 
 
 <br/>
 
