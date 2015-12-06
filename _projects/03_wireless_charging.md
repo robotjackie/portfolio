@@ -25,7 +25,7 @@ We did this project using the following equipment:
 - the Bitcraze "Crazyflie" mini quadcopter
 
 <center>
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true width="400">
+<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true" width="400">
 </center>
 
 
