@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Tele-operated ROS App
+title: Tele-operating ROS
 date: Nov 5, 2014
 image: turtlesim.png
 ---
