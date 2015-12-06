@@ -4,16 +4,17 @@ title: Arduino Camera Project
 date: February 20, 2015
 image: mega2560_ov7670_side.jpg
 ---
-### STATUS: Not maintained. Please don't contact me about this project.
+### STATUS: Not maintained. 
+Please don't contact me about this project. Unless you know how to get it to work better.
 
 ## Overview
 For this project I tried to get an Omnivision 7670 camera working with various Arduinos. I partially succeeded in getting some images off, but I was not successful in getting quality image.
 
-<center><img src="http://i.imgur.com/7FdYsBd.jpg?1" width="500"></center>
+<center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
 
 The Omnivision (OV)7670 camera comes in 2 forms: with a memory chip. To determine whether this camera has a chip or not, turn it over; the one with "FIFO" memory has a little horizontal chip (ALB422) on the back.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="400"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="350"></center>
 
 and without. 
 
@@ -31,7 +32,7 @@ enough to store 1 image in YUV, at 2 bytes/pixel.
 camera case
 unscrew cap
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="300"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="250"></center>
 
 
 manual screw to change focus
@@ -49,6 +50,11 @@ Mega2560
 Mega clone
 
 Pro Mini
+
+[ValueHobby - very cheap Arduino clones and other electronic components](www.valuehobby.com/arduino-and-cnc.html), for $2-3, in Chicago. Has fast ground shipping. Couldn't wait, drove 40 minutes to some warehouses by O'Hare to pick up my cheap electronics
+
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="400"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="400"></center>
 
 Book code
 
@@ -113,17 +119,25 @@ Brightest blog detection, at 2-3 fps:
 <img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="450">
 </center>
 
-Book code - not great. Tried changing the focus with little impact.
+Book code - not great. Tried changing the focus with little impact. (The dark blob on the left side of the image on the right is me!)
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA0.jpg" width="450">
 <img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA1.jpg" width="450">
 </center>
 
+#### Output format: YUV 
+
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
+
+2400 lines, each line has 8 words, each word is 4-digit hex. 
+1 hex character is half a byte, so each word is 2 bytes.
+2 bytes * 8 per line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
+so each 2-byte word is one pixel, which is what we expected.
 
 
 ## Challenges
 
-BE CAREFUL: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries floating out there are sometimes for other cameras, like OV7076, or other cameras starting with "OV," which make it easy to mistakenly try to get to work with your OV7670 camera. 
+BE CAREFUL: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
 
 Decrease baud rate for Serial
@@ -131,14 +145,16 @@ Decrease baud rate for Serial
 From the Arduvision blog:
 
 > In the arduino sketch look for the line:
+> 
 >    static const unsigned long _BAUDRATE = 500000;
 > 
 > And in the processing sketch, in the globalDefinitions.java tab:
+>
 >    public final static int BAUDRATE = 500000;
 > 
 > Try with substituting the 500000 for 115200.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="600"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
 SD card fragile / somewhat broken - used rubber band to hold together. Solved some funny SD card problems, e.g. taking 70 seconds + 0 seconds for 2 images and re-writing old images
 or would work, but take 70 seconds to write 1 image, 0 seconds to write other images. 
@@ -152,15 +168,6 @@ worked
 
 Photon bug:
 To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Photon (possibly to Safe Mode), and flash code to it
-
-#### Output format: YUV 
-
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
-
-2400 lines, each line has 8 words, each word is 4-digit hex. 
-1 hex character is half a byte, so each word is 2 bytes.
-2 bytes * 8 per line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
-so each 2-byte word is one pixel, which is what we expected.
 
 Used free software trial of "All to Real Converter Standard" to convert images to JPG.
 Tried many different softwares and online apps, this was the only one that worked, and it was not very convenient. 
