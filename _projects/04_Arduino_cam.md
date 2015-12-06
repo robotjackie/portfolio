@@ -4,10 +4,15 @@ title: Light Blob Detection with $5 Camera
 date: February 20, 2015
 image: mega2560_ov7670_side.jpg
 ---
-### STATUS: Not maintained. Please don't contact me about this project, unless you know how to make it work better.
+### STATUS: Not maintained. 
+#### Please don't contact me about this project, unless you know how to make it work better.
+
+<br/>
 
 ## Overview
 For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect blobs. I partially succeeded in that I could detect blobs of light, but I was not successful in getting quality images or video stream from the camera.
+
+<br/>
 
 <center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
 
@@ -50,6 +55,8 @@ I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="400"></center>
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="400"></center>
 
+<br/>
+
 Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "Sources" below.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
@@ -57,6 +64,8 @@ Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera
 I also heavily leaned on code from a repo called Arduvision (see "Sources" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
 Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car.
+
+<br/>
 
 ## Technical Details
 
@@ -73,35 +82,39 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 - GDN ----- ground
 
-- SIO_C --- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR)
+- SIO_C ----- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR)
 
-- SIO_D --- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR)
+- SIO_D ----- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR)
 
-- VSYNC --- frame synchronizing signal (output - pulses at beginning and end of each frame)
+- VSYNC ----- frame synchronizing signal (output - pulses at beginning and end of each frame)
 
-- HREF ---- line synchronizing signal (unused)
+- HREF ----- line synchronizing signal (unused)
 
-- D0-D7 --- data port (output)
+- D0-D7 ----- data port (output)
 
-- RST --- reset port (triggered when LOW)
+- RST ----- reset port (triggered when LOW)
 
-- PWDN ---- power selection mode (triggered when HIGH)
+- PWDN ----- power selection mode (triggered when HIGH)
 
-- STROBE -- photographed flash control port (unused)
+- STROBE ----- photographed flash control port (unused)
 
-- FIFO_RCK --- FIFO memory read clock control terminal
+- FIFO_RCK ----- FIFO memory read clock control terminal
 
 - FIFO_OE ---- FIFO off control (connect to GROUND RAIL)
 
-- FIFO_WRST-FIFO write pointer reset terminal
+- FIFO_WRST-FIFO ----- write pointer reset terminal
 
-- FIFO_RRST-FIFO read pointer reset terminal
+- FIFO_RRST-FIFO ----- read pointer reset terminal
+
+<br/>
 
 Pin connections:
 
 With Arduino Pro Mini
 doesn't use all the data pins
 <center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="600"></center>
+
+<br/>
 
 #### Timing diagrams:
 
@@ -119,17 +132,23 @@ The main two that I used are from the book "Beginning OV7670 with Arduino," and 
 
 #### Register Settings
 
+<br/>
+
 ## Results
 
 At first I only got garbage. It looked like part of the image was being read and sent correctly, but perhaps the timing was off. Some of this was resolved by decreasing the baud rate to Serial, and also by re-wiring the connections more accurately and with shorter wires.
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="500"></center>
 
+<br/>
+
 Luckily, the light blob detection from the Arduvision library worked. It refreshed at about 2-3 fps and displayed a light blob from lighting sources, such as the overhead light in the room or my mobile camera's flash, and it displayed dark blobs when the light sources were covered. For some reason everything had a green-ish tinge. 
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="450">
 <img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="450">
 </center>
+
+<br/>
 
 However, the code from the _Beginning OV7670 with Arduino_ book did not work well. There were many problems (listed below in "Challenges"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) 
 
@@ -143,8 +162,6 @@ As you can see it is quite blurry. I tried manually changing the focus, with lit
 
 #### Output format: YUV 
 
-<br/>
-
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
 2400 lines, each line has 8 words, each word is 4-digit hex. 
@@ -155,7 +172,7 @@ so each 2-byte word is one pixel, which is what we expected.
 
 ## Challenges
 
-- BE CAREFUL: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
+- BE careful: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
 - Data sheet for pins may be different
 
@@ -163,15 +180,7 @@ so each 2-byte word is one pixel, which is what we expected.
 
 - From the Arduvision blog:
 
-> In the arduino sketch look for the line:
-> 
->    static const unsigned long _BAUDRATE = 500000;
-> 
-> And in the processing sketch, in the globalDefinitions.java tab:
->
->    public final static int BAUDRATE = 500000;
-> 
-> Try with substituting the 500000 for 115200.
+Change the line "static const unsigned long _BAUDRATE = 500000;" in the Arduino code, and the line "public final static int BAUDRATE = 500000;" in the globalDefinitions.java file of the Processing sketch. Try with substituting the 500000 for 115200.
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
@@ -200,6 +209,8 @@ To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Ph
 - Used free software trial of "All to Real Converter Standard" to convert images to JPG.
 Tried many different softwares and online apps, this was the only one that worked, and it was not very convenient. 
 15-day free trial
+
+<br/>
 
 ## Sources
 
