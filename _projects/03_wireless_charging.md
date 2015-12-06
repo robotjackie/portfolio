@@ -12,27 +12,28 @@ Current drones generally need a USB wire cable to charge, which requires a human
 
 This proof of concept, of a rather simple principle that others have done before me, grew into a startup that I recently incorporated in 2015. My company is called Eighty Nine Robotics, LLC, and the mission is to put a drone in every home and in buildings around the world. 
 
-Part of my personal journey, upon graduating from undergrad at Northwestern in 2013, was that I saw many of my friends go into consulting or finance, because it seemed like the default, prestigious thing to do. But I knew that these jobs, while paying well for a fresh 22-year old, weren't my passion or life purpose. I wanted to start my own company and accept the risks and responsbilities for my own life. I wanted the freedom to work hard to realize my own dreams, which lie in using technology for economic development and to improve the human condition (one of my majors was Economics in undergrad). 
-
-I was lucky enough to be accepted into the Masters in Robotics program with Todd Murphey and Jarvis Schultz' kindness, and entered the program with the goal of eventually starting a robotics company during or immediately after graduating from it.
+<br/>
 
 ## General Approach
 
 In order to get this to work, we wanted to do the minimum necessary to prove a concept, and not reinvent the wheel from scratch. My friend Ritwik Ummalaneni and I combined an off-the-shelf drone, controllable by PC, with a remote camera transmitter and an inductive charging unit. 
 
+<br/>
+
 We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
 
-<center>
 <img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true" width="400">
-</center>
 
+<br/>
 
 - Camera and transmitter: [1 gram camera + transmission module](http://www.fpvhobby.com/143-sub-nano-combo-set.html)
 
 This was sold as the lightest camera + transmitter combo in the world by Chinese manufacturers, with an odd camera resolution (something like PAL 720x576).
 <center><img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="300"></center>
+
+<br/>
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/palm_charger.jpg?raw=true" width="300"></center>
@@ -43,13 +44,21 @@ We ran into a few difficulties in the project, but generally were able to get th
 
 The two components connect with 3 wires, GND, 3V3, and the video data wire. The GND and 3V3 cables could then be connected to another power source such as pins on an Arduino. An antenna could also be added, and the whole thing could be heat-shrinked with a plastic wrap that came with the shipment (we didn't bother).
 
+<br/>
+
 <center><img src="http://www.fpvhobby.com/img/p/143-354-thickbox.jpg" width="250"><img src="http://www.fpvhobby.com/img/p/143-380-thickbox.jpg" width="250"></center>
+
+<br/>
 
 In addition, we needed a TV antenna receiver in order to display the image. As a follow-up, one could buy a USB dongle to receive and transfer the images onto the computer in order to do image processing on the video stream.
 
 The inductive charger has some sort of microcontroller presumably to regulate charging. Unfortunately, near the end of our project, the charging chip on the inductive coils broke: 
 
+<br/>
+
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie_broken.jpg?raw=true" alt="Broken charging chip" width="400"></center>
+
+<br/>
 
 One could solve this by buying the official [Crazyflie inductive charging coils expansion board](http://www.seeedstudio.com/depot/Crazyflie-20-Qi-inductive-charging-expansion-board-p-2112.html), or just the [inductive charging coils](http://www.digikey.com/product-search/en/inductors-coils-chokes/wireless-charging-coils/197928?WT.srch=1) from a distributor and creating one's own PCB to address charging.
 
