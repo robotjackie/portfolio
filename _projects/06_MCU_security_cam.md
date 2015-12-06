@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Streaming Security Camera Project
+title: Security Camera Networking
 date: February 20, 2015
 image: microchip_back.jpg
 ---
@@ -16,7 +16,7 @@ The project profile picture shows the MEB-II from the back, with the Microchip S
 
 This is the front, with a display screen.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/microchip_front.jpg" width="300"></center>
+<center><img src="http://i.imgur.com/rWGBN0E.jpg" width="400"></center>
 
 ## Implementation
 
@@ -75,7 +75,7 @@ Code is poorly documented and long
 
 Product error - had to remove a resistor and solder a wire in order to get WiFi to work
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_tiny_resistor.jpg" width="300"></center>
+<center><img src="http://i.imgur.com/sXaJaMT.jpg" width="400"></center>
 
 Northwestern networks were difficult - couldn't connect. Also, couldn't use Guest Network. Had to use home network or turn phone into a hotspot.
 

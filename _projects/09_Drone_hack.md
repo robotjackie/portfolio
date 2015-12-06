@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Haptics device research
+title: Hacking Drone Control
 date: February 20, 2015
 image: nRF_arduino.jpg
 ---

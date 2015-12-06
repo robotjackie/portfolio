@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Android Quadcopter App
+title: Beginner Android App
 date: Jan 15, 2015 - Current
 image: app_mockup.png
 ---
