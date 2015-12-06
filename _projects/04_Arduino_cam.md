@@ -9,28 +9,28 @@ image: mega2560_ov7670_side.jpg
 ## Overview
 For this project I tried to get an Omnivision 7670 camera working with various Arduinos. I partially succeeded in getting some images off, but I was not successful in getting quality image.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/mega2560_ov7670.jpg"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/mega2560_ov7670.jpg" width="800"></center>
 
 The Omnivision (OV)7670 camera comes in 2 forms: with a memory chip, and without. The one with a memory chip 
 
 ALB422
 enough to store 1 image in YUV, at 2 bytes/pixel. 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.JPG">
-<img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.JPG">
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="400">
+<img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="400">
 </center>
 
 
 camera case
 unscrew cap
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.JPG"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="600"></center>
 
 
 manual screw to change focus
 golden finger connections, no case
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.JPG"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.jpg" width="500"></center>
 
 
 
@@ -106,6 +106,13 @@ Brightest blog detection, at 2-3 fps:
 <img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="400">
 </center>
 
+Book code - not great. Tried changing the focus with little impact.
+
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/vga0.jpg?raw=true" width="400">
+<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/vga0.jpg?raw=true" width="400">
+</center>
+
+
 
 ## Challenges
 
@@ -160,11 +167,11 @@ Tried many different softwares and online apps, this was the only one that worke
 
 (3) OV7670 Datasheet [downloads as PDF](http://www.electrodragon.com/w/File:OV7670_DS_(1_4).pdf)
 
-(4) Electrodragon description [http://www.electrodragon.com/w/index.php?title=OV7670_Module#Demo_Code](http://www.electrodragon.com/w/index.php?title=OV7670_Module#Demo_Code)
+(4) Electrodragon background info and description of the OV7670 camera [http://www.electrodragon.com/w/index.php?title=OV7670_Module#Demo_Code](http://www.electrodragon.com/w/index.php?title=OV7670_Module#Demo_Code)
 
-(5) arndtjenssen GitHub library with AVR ATmega1284 to give ideas [https://github.com/arndtjenssen/ov7670](https://github.com/arndtjenssen/ov7670). An example of [pin wirings for the ATMega1284](https://github.com/arndtjenssen/ov7670/blob/master/ov7670_test/ov7670_ports.h)
+(5) arndtjenssen GitHub library with AVR ATmega1284, to give ideas on how to use it [https://github.com/arndtjenssen/ov7670](https://github.com/arndtjenssen/ov7670). An example of [pin wirings for the ATMega1284](https://github.com/arndtjenssen/ov7670/blob/master/ov7670_test/ov7670_ports.h)
 
-(6) Several posts on this ThinkSmallThings blog can give you an idea [https://thinksmallthings.wordpress.com/2015/01/11/atmega328-ov7670-fifo-module-software/](https://thinksmallthings.wordpress.com/2015/01/11/atmega328-ov7670-fifo-module-software/)
+(6) Several posts on this ThinkSmallThings blog can give you an idea on how to use it [https://thinksmallthings.wordpress.com/2015/01/11/atmega328-ov7670-fifo-module-software/](https://thinksmallthings.wordpress.com/2015/01/11/atmega328-ov7670-fifo-module-software/)
 
 (7) Video resources with the OV7670 that may help [http://www.yourepeat.com/g/OV7670](http://www.yourepeat.com/g/OV7670)
 
