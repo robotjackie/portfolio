@@ -51,7 +51,7 @@ I tried various microcontrollers with the OV7670 with FIFO, including different 
 
 - [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with built-in WiFi and online IDE). 
 
-I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), which has very cheap Arduino clones and other electronic components in the $2-5 range. ValueHobby has standard ground shipping from Chicago, but I couldn't wait so I drove 40 minutes to their warehouse by O'Hare Airport to pick up my cheap electronics the day I ordered them.
+I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China, in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="400"></center>
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="400"></center>
@@ -70,21 +70,29 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 ## Technical Details
 
-#### Register Settings
+### Register Settings
 
 There are many registers for this camera, and many register functions have multiple register locations and settings. A comprehensive list of each register and bit can be found in the datasheet listed in the "Sources" section of this page. While the hard way to change registers is that one could write functions to change a bit and mask the rest in a register, the easy way is that the Arduino library has a write function from its Wire library to simplify this task. As long as one knows the location of the register and its value, one can easily change the settings. Libraries for existing register settings can be found in the code from the book as well as some of the repos under "Sources."
 
 **Resolution**
 
-The OV7670 camera has several options for resolution: VGA (640x480 pixels), QVGA (320x240 pixels), QQVGA (160x120 pixels), and weird resolutions like CIF (352x288 pixels) and QCIF (176x144 pixels). 
+The OV7670 camera has several options for resolution: 
+
+- VGA (640x480 pixels)
+
+- QVGA (320x240 pixels)
+
+- QQVGA (160x120 pixels)
+
+- and weird resolutions like CIF (352x288 pixels) and QCIF (176x144 pixels). 
 
 **Image format**
 
-As mentioned above, the OV7670 can output various quality RGB, YUV, YCbCr, and Raw and processed Bayer.
+The OV7670 can output various quality RGB, YUV, YCbCr, and Raw and processed Bayer formats. They will be covered below in "Image color formats."
 
 **Frames per second**
 
-Uses a clock to scale the frames per second. The max is 30 fps.
+The camera uses a clock to scale the frames per second. The max is 30 fps.
 
 **Other settings**
 
@@ -94,33 +102,33 @@ In addition to setting the resolution, image format, and frames per second, the 
 
 - AEC (Auto Exposure Control) settings
 
-- Gain - Some photographers say this is the electronic analog to focus, when the signal is amplified electronically. Something with more gain has more luminance in the photo.
+- Gain - Some photographers compare this as the electronic analog to focus, when the signal is amplified electronically. An image with more gain has more luminance in the photo.
 
 - AGC (Auto Gain Control) settings
 
-- White balancing - calibrating the "white point" of a photo. Depending on the lighting conditions, a pure white wall for example may seem off-white in the image. This lighting may throw off all the colors. By finding a constant red, green, and blue correction to calibrate the off-white as actual white, this correction may be applied to the rest of the pixels so that all colors may be shifted toward their actual color values regardless of the situational lighting condition.
+- White balancing - calibrating the "white point" of a photo. Depending on the lighting conditions, a pure white wall for example may seem off-white in the image. This lighting condition may throw off all the colors. By finding a constant red, green, and blue correction to calibrate the off-white as actual white, this correction may be applied to the rest of the pixels so that all colors may be shifted toward their actual color values regardless of the situational lighting condition.
 
 - AWB (Auto White Balancing) - auto-sets the whitest point of a photo to find the above correction
 
-- BLC (Black Level Calibration) - same as white balancing, above, but for black
+- BLC (Black Level Calibration) - same as white balancing above, but for black
 
 - ABLC (Auto Black Level Calibration) - calibrates the blackest part of the image to true black, and corrects the rest of the colors
 
 - NightMode - not entirely sure how this works, but it allows the camera to work in low light conditions. Perhaps it changes the exposure and gain settings.
 
-- Demosaicing - processing the Raw Bayer image format into full color image
+- Demosaicing - processing the Raw Bayer image format into full color image (see below in "Image color formats")
 
-- 50/60 Hz detection - eliminate flickering from common fluorescent lights that run at 50 Hz, or monitors and screens that run at 60 Hz, presumably by dividing frame-rate or shutter speed by a constant to sync with the lighting pulse rate
+- 50/60 Hz detection - Eliminate flickering in the camera's video from common fluorescent lights that run at 50 Hz, or monitors and screens that run at 60 Hz. Presumably the camera does this by dividing frame-rate or shutter speed by a constant to sync with the lighting pulse rate.
 
-- Other register settings, such as edge enhancement, denoising, image scaling, saturation, vertical/horizontal flipping, and other color correction (using gamma curves and histograms). There are also many registers whose functions are not explained as well as unused registers.
+- Other register settings, such as edge enhancement, denoising, image scaling, saturation, vertical/horizontal flipping, and other color correction (using gamma curves and histograms). There are also many registers whose functions are not explained, as well as unused register bits.
 
 <br/>
 
-#### Camera components:
+### Camera components:
 
-The light hits the lens (A) and is fed into the image array (B), which is slightly larger than 640x480 (it's 656x488). The image array is covered by red, green, and blue sensors that only allow those parts of the wavelength in, arranged in a Raw Bayer format (see below under "Image color formats"). The image array transmits an analog intensity for each sensor. 
+Here is how the camera works. First, light hits the lens (A) and is fed into the image array (B), which is slightly larger than 640x480 (it's 656x488 - not sure why). The image array is covered by red, green, and blue sensors that only allow those parts of the wavelength in, arranged in a raw Bayer format (see below under "Image color formats"). The image array transmits an analog intensity for each sensor. 
 
-The first step in processing is analog processing (C), where AEC, AGC, ABLC etc. are applied. These settings can be automatic or manual, depending on the register settings (most likely they will be on automatic, for the sake of simplicity). Then other register settings (D) such as resolution, image format, frame rate etc. are called. These registers are read and changed from the SCCB interface (E) which is connected by I2C to the processor. There is also a register setting option of generating a test pattern (F).
+The first step in processing is analog processing (C), where AEC, AGC, ABLC etc. are applied. These settings can be automatic or manual, depending on the register settings (most likely they will be on automatic, for ease of use). Then other register settings (D) such as resolution, image format, frame rate etc. are called. These registers are read and changed from the SCCB interface (E) which is connected by I2C to the processor. There is also a register setting option of generating a test pattern (F).
 
 The next step in processing is that the analog signal is converted to a 10 bit digital signal by an ADC (G). Settings such as 50/60 Hz Auto Detect (H) and exposure/gain detection and control (I) are utilized, followed by a DSP (digital signal processor) (J) that handles white balance and color correction such as gamma control, saturation, and de-noising. This is also where a color matrix is applied to convert colors, with a fixed formula multiplying RGB values by a conversion matrix set by camera registers to return YUV values, for example (see "Image color formats" below). The last processing register is an image scaler (K) that scales down VGA quality to the other available resolutions.
 
@@ -130,7 +138,7 @@ The image then goes into the FIFO memory buffer (L), which as explained above ca
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true" width="650"></center>
 
 
-#### Pins: 
+### Pins: 
 
 (From electrodragon - see "Sources" at end)
 
@@ -172,7 +180,7 @@ doesn't use all the data pins
 
 <br/>
 
-#### Timing diagrams:
+### Timing diagrams:
 
 <center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700">
 
@@ -182,7 +190,7 @@ doesn't use all the data pins
 
 <br/>
 
-#### Image color formats
+### Image color formats
 The formats used by the OV7670 are the RGB565, RGB555 and RGB444, 
 RGB565 is 5 bits for R, 6 bits for G, and 5 bits for B. So that means Red is split up into 2^5=32 different levels of red, Green into 2^6=64, etc.
 
@@ -190,7 +198,7 @@ In addition there are formats with Yxxxx, such as YCbCr and YUV.
 
 Finally, there is the Raw Bayer formats. The image sensor contains sensors in a BG/GR Bayer filter pattern, with blue and green filters alternating in one row, and green and red in the next. These filters only allow light of that wavelength in. That means that a pixel must fill in the 2 missing colors in an estimating process called "demosaicing" in order to have full color. This outputs the processed Bayer format.
 
-#### Libraries
+### Libraries
 See "Sources" at bottom for different libraries with different microcontrollers.
 
 The main two that I used are from the book "Beginning OV7670 with Arduino," and the Arduvision library.
