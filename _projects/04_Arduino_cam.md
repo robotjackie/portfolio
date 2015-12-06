@@ -139,11 +139,11 @@ As you can see it is quite blurry. I tried manually changing the focus, with lit
 <img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA1.jpg" width="450">
 </center>
 
-<p>
+<br/>
 
 #### Output format: YUV 
 
-<p>
+<br/>
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
@@ -155,13 +155,13 @@ so each 2-byte word is one pixel, which is what we expected.
 
 ## Challenges
 
-BE CAREFUL: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
+- BE CAREFUL: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
-Data sheet for pins may be different
+- Data sheet for pins may be different
 
-Decrease baud rate for Serial
+- Decrease baud rate for Serial
 
-From the Arduvision blog:
+- From the Arduvision blog:
 
 > In the arduino sketch look for the line:
 > 
@@ -175,7 +175,7 @@ From the Arduvision blog:
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
-SD card fragile / somewhat broken - used rubber band to hold together. Solved some funny SD card problems, e.g. taking 70 seconds + 0 seconds for 2 images and re-writing old images
+- SD card fragile / somewhat broken - used rubber band to hold together. Solved some funny SD card problems, e.g. taking 70 seconds + 0 seconds for 2 images and re-writing old images
 or would work, but take 70 seconds to write 1 image, 0 seconds to write other images. 
 Or would rewrite over old images
 
@@ -185,19 +185,19 @@ reformatted with FAT32 - 4 GB
 held down with rubber band
 worked
 
-too large for a nano, must use mega
+- code too large for a nano, must use mega
 
-mega clone failed. could reinstall firmware
+- mega clone failed. could reinstall firmware
 
-input voltage is wrong - used 4.7K resistors
+- input voltage is wrong - used 4.7K resistors
 switched with Athulya in case camera sensor burned out
 
-some pins are pull-LOW to activate, while others are pull-HIGH. this was tricky if not noticed.
+- some pins are pull-LOW to activate, while others are pull-HIGH. this was tricky if not noticed.
 
-Photon bug:
+- Photon bug:
 To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Photon (possibly to Safe Mode), and flash code to it
 
-Used free software trial of "All to Real Converter Standard" to convert images to JPG.
+- Used free software trial of "All to Real Converter Standard" to convert images to JPG.
 Tried many different softwares and online apps, this was the only one that worked, and it was not very convenient. 
 15-day free trial
 
