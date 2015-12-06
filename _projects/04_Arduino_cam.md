@@ -9,28 +9,35 @@ image: mega2560_ov7670_side.jpg
 ## Overview
 For this project I tried to get an Omnivision 7670 camera working with various Arduinos. I partially succeeded in getting some images off, but I was not successful in getting quality image.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/mega2560_ov7670.jpg" width="800"></center>
+<center><img src="http://i.imgur.com/7FdYsBd.jpg?1" width="500"></center>
 
-The Omnivision (OV)7670 camera comes in 2 forms: with a memory chip, and without. The one with a memory chip 
+The Omnivision (OV)7670 camera comes in 2 forms: with a memory chip. To determine whether this camera has a chip or not, turn it over; the one with "FIFO" memory has a little horizontal chip (ALB422) on the back.
 
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="400"></center>
+
+and without. 
+
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300">
+</center>
+
+The one with a memory chip 
 ALB422
 enough to store 1 image in YUV, at 2 bytes/pixel. 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="400">
-<img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="400">
-</center>
+
+
 
 
 camera case
 unscrew cap
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="600"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="300"></center>
 
 
 manual screw to change focus
 golden finger connections, no case
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.jpg" width="500"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.jpg" width="300"></center>
 
 
 
@@ -98,18 +105,18 @@ The main two that I used are from the book "Beginning OV7670 with Arduino," and 
 
 ## Results
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="400"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="500"></center>
 
 Brightest blog detection, at 2-3 fps: 
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="400">
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="400">
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="450">
+<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="450">
 </center>
 
 Book code - not great. Tried changing the focus with little impact.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/vga0.jpg?raw=true" width="400">
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/vga0.jpg?raw=true" width="400">
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA0.jpg" width="450">
+<img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA1.jpg" width="450">
 </center>
 
 
@@ -148,7 +155,7 @@ To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Ph
 
 #### Output format: YUV 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
 2400 lines, each line has 8 words, each word is 4-digit hex. 
 1 hex character is half a byte, so each word is 2 bytes.
