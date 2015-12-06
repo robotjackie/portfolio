@@ -9,28 +9,28 @@ image: mega2560_ov7670_side.jpg
 ## Overview
 For this project I tried to get an Omnivision 7670 camera working with various Arduinos. I partially succeeded in getting some images off, but I was not successful in getting quality image.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/mega2560_ov7670.JPG?raw=true"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/mega2560_ov7670.jpg"></center>
 
 The Omnivision (OV)7670 camera comes in 2 forms: with a memory chip, and without. The one with a memory chip 
 
 ALB422
 enough to store 1 image in YUV, at 2 bytes/pixel. 
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_with_fifo.JPG?raw=true">
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_non_fifo.JPG?raw=true">
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.JPG">
+<img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.JPG">
 </center>
 
 
 camera case
 unscrew cap
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_with_cap.JPG?raw=true"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.JPG"></center>
 
 
 manual screw to change focus
 golden finger connections, no case
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_golden_finger.JPG?raw=true"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.JPG"></center>
 
 
 
@@ -78,11 +78,11 @@ Pin connections:
 
 With Arduino Pro Mini
 doesn't use all the data pins
-<center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png"></center>
+<center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="600"></center>
 
 #### Timing diagrams:
 
-<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg"><img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg"></center>
+<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700"><img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
 
 #### Image color formats
 The formats used by the OV7670 are the RGB565, RGB555 and RGB444
@@ -98,12 +98,12 @@ The main two that I used are from the book "Beginning OV7670 with Arduino," and 
 
 ## Results
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="400"></center>
 
 Brightest blog detection, at 2-3 fps: 
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true">
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true">
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="400">
+<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="400">
 </center>
 
 
@@ -124,7 +124,7 @@ From the Arduvision blog:
 > 
 > Try with substituting the 500000 for 115200.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="600"></center>
 
 SD card fragile / somewhat broken - used rubber band to hold together. Solved some funny SD card problems, e.g. taking 70 seconds + 0 seconds for 2 images and re-writing old images
 or would work, but take 70 seconds to write 1 image, 0 seconds to write other images. 
@@ -140,7 +140,9 @@ Photon bug:
 To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Photon (possibly to Safe Mode), and flash code to it
 
 #### Output format: YUV 
-<yuv.jpg>
+
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg"></center>
+
 2400 lines, each line has 8 words, each word is 4-digit hex. 
 1 hex character is half a byte, so each word is 2 bytes.
 2 bytes * 8 per line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
