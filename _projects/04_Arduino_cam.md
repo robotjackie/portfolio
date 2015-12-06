@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Arduino Camera Project
+title: Light Blob Detection with $5 Camera
 date: February 20, 2015
 image: mega2560_ov7670_side.jpg
 ---
@@ -8,57 +8,46 @@ image: mega2560_ov7670_side.jpg
 Please don't contact me about this project. Unless you know how to get it to work better.
 
 ## Overview
-For this project I tried to get an Omnivision 7670 camera working with various Arduinos. I partially succeeded in getting some images off, but I was not successful in getting quality image.
+For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect blobs. I partially succeeded in that I could detect the locations of blobs of light, but I was not successful in getting quality images or video stream from the camera.
 
 <center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
 
-The Omnivision (OV)7670 camera comes in 2 forms: with a memory chip. To determine whether this camera has a chip or not, turn it over; the one with "FIFO" memory has a little horizontal chip (ALB422) on the back.
+The Omnivision OV7670 camera is a cheap, mobile-phone quality CMOS camera that in bulk sells for under $5 from Chinese suppliers on Alibaba. The camera is supposed to be able to do VGA 640x480 resolution video streaming at 30 fps. It comes in 2 forms: with a memory chip or without. It also comes in different form factors in the number of pins: 18, 20, 22, and 24 pins. 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="350"></center>
-
-and without. 
-
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300">
-</center>
-
-The one with a memory chip 
-ALB422
-enough to store 1 image in YUV, at 2 bytes/pixel. 
-
-
-
-
-
-camera case
-unscrew cap
+In the States, one can buy a PCB module for this camera for $8-25 on [Amazon](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dphoto&field-keywords=ov7670+fifo). The module is 3.5mm x 3.5mm x 3mm deep. This module breaks out and labels the camera's pins to male headers that can be soldered, or plugged into female/male ports for breadboarding. In addition, the module comes with a case that is much larger than the actual camera itself, which has a camera cap. 
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_cap.jpg" width="250"></center>
 
+To determine whether the OV7670 camera module has a memory chip or not, turn it over; the one with "FIFO" memory has a little horizontal memory chip (ALB422) on the back.
 
-manual screw to change focus
-golden finger connections, no case
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_with_fifo.jpg"  width="350"></center>
+
+...while the OV7670 non-FIFO does not have it. 
+
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300"></center>
+
+The one with a memory chip (ALB422) has enough space to store 1 image in YUV image format, at 2 bytes/pixel. It then allows the image to be read off 8 parallel data pins. The camera can take 3.3V input, and some online claim that 5V input may burn the image sensors.
+
+One can manually adjust the focus of the camera by screwing it left/right. In addition, in the case of manufacturing, the bare camera often comes with "Golden Finger" connections, and without the case of the module, the form factor is quite small:
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.jpg" width="300"></center>
 
 
-
 ## Implementation
-Nano
+I tried various microcontrollers with the OV7670 with FIFO, including different Arduinos and Arduino clones (Nano, Mega2560, Mega clone, Pro Mini), and a [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with built-in WiFi and online IDE). 
 
-Mega2560
-
-Mega clone
-
-Pro Mini
-
-[ValueHobby - very cheap Arduino clones and other electronic components](www.valuehobby.com/arduino-and-cnc.html), for $2-3, in Chicago. Has fast ground shipping. Couldn't wait, drove 40 minutes to some warehouses by O'Hare to pick up my cheap electronics
+I bought many of my Arduino clones from [ValueHobby - which has very cheap Arduino clones and other electronic components](www.valuehobby.com/arduino-and-cnc.html), for $2-3, in Chicago. It has standard ground shipping, but I couldn't wait so I drove 40 minutes to their warehouse by O'Hare Airport to pick up my cheap electronics the day I ordered them.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="400"></center>
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="400"></center>
 
-Book code
+Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera with Arduino Mega2560. This can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. This book contains a library for the register settings to make the camera work, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in Sources below.
 
-Arduvision code - with Processing
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
+
+I also heavily leaned on code from a repo called Arduvision (see Sources below). It is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and with an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
+
+Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I worked with my classmate Athulya Simon who tried to get the OV7670 + FIFO camera to work with a PIC32MX microcontroller to drive a robotic car.
 
 ## Technical Details
 
@@ -111,15 +100,17 @@ The main two that I used are from the book "Beginning OV7670 with Arduino," and 
 
 ## Results
 
+At first I only got garbage blob detection. It looked like part of the image was being read and sent correctly, but the timing was off. Some of this was resolved by decreasing the baud rate to Serial, and also by re-wiring the connections more accurately and with shorter wires.
+
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="500"></center>
 
-Brightest blog detection, at 2-3 fps: 
+Luckily, the light blob detection from the Arduvision library worked. It refreshed at about 2-3 fps and displayed a light blob from lighting sources such as the overhead light or our cell phone camera flash, and dark blobs when the light sources were covered. For some reason everything had a green-ish tinge; I wasn't sure why. 
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="450">
 <img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="450">
 </center>
 
-Book code - not great. Tried changing the focus with little impact. (The dark blob on the left side of the image on the right is me!)
+The code from the _Beginning OV7670 with Arduino_ book did not work well. There were many problems (listed below in "Challenges"), and the program could only take 1 image at a time to save to SD; it was unable to stream video. I tried to modify the code to output to Serial but did not succeed. Below is the image quality from the book's code. (The dark blob on the left side of the image on the right is me!) As you can see it is quite blurry. I tried changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library, and I couldn't figure out why it didn't give me quality camera feed.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA0.jpg" width="450">
 <img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA1.jpg" width="450">
@@ -139,6 +130,7 @@ so each 2-byte word is one pixel, which is what we expected.
 
 BE CAREFUL: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
+Data sheet for pins may be different
 
 Decrease baud rate for Serial
 
@@ -165,6 +157,15 @@ shorter wires
 reformatted with FAT32 - 4 GB
 held down with rubber band
 worked
+
+too large for a nano, must use mega
+
+mega clone failed. could reinstall firmware
+
+input voltage is wrong - used 4.7K resistors
+switched with Athulya in case camera sensor burned out
+
+some pins are pull-LOW to activate, while others are pull-HIGH. this was tricky if not noticed.
 
 Photon bug:
 To solve the I2C issue, can manually hold 3V3 wires to both wires, reboot the Photon (possibly to Safe Mode), and flash code to it
