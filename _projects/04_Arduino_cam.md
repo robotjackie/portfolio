@@ -31,7 +31,7 @@ To determine whether the OV7670 camera module has a memory chip or not, turn it 
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300"></center>
 
-The one with a memory chip (ALB422) has enough space to store 1 image in raw Bayer image format, at 1 byte/pixel (more on YUV image format below, under "Image color formats"). It can hold 384K bytes. The module then allows the image to be read from the memory chip off 8 parallel data pins. 
+The one with a memory chip (ALB422) has enough space to store 1 image in raw Bayer image format, at 1 byte/pixel (more on YUV image format below, under "Image color formats"). It can hold 384K bytes (while 640px * 480px * 1 byte/px = 307.2K bytes). The module then allows the image to be read from the memory chip off 8 parallel data pins. 
 
 This camera module makes prototyping with the camera quite easy. But in the case of manufacturing, the bare camera often comes with "Golden Finger" connections for each pin. Without the bulky case of the module, the form factor for the actual camera is quite small:
 
@@ -51,18 +51,18 @@ I tried various microcontrollers with the OV7670 with FIFO, including different 
 
 - [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with built-in WiFi and online IDE). 
 
-I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China, in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
+I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="400"></center>
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="400"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="600"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="600"></center>
 
 <br/>
 
-Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "Sources" below.
+Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It uses the version of the OV7670+FIFO that has 22 pins. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "Sources" below.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
 
-I also heavily leaned on code from a repo called Arduvision (see "Sources" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
+I also heavily leaned on code from a repo called Arduvision (see "Sources" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
 Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car.
 
@@ -144,11 +144,11 @@ The image then goes into the FIFO memory buffer (L), which as explained above ca
 
 - 3V3 ----- input supply voltage (3V3)
 
-- GDN ----- ground
+- GND ----- ground
 
-- SIO_C ----- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR)
+- SIO_C (aka SIOC) ----- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR)
 
-- SIO_D ----- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR)
+- SIO_D (aka SIOD) ----- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR)
 
 - VSYNC ----- frame synchronizing signal (output - pulses at beginning and end of each frame)
 
@@ -156,29 +156,49 @@ The image then goes into the FIFO memory buffer (L), which as explained above ca
 
 - D0-D7 ----- data port (output)
 
+- WEN (aka WR) ----- write enable
+
 - RST ----- reset port (triggered when LOW)
 
 - PWDN ----- power selection mode (triggered when HIGH)
 
-- STROBE ----- photographed flash control port (unused)
+- STROBE ----- camera flash control (unused)
 
-- FIFO_RCK ----- FIFO memory read clock control terminal
+- RCK (aka RCLK) ----- FIFO memory read clock control terminal
 
-- FIFO_OE ---- FIFO off control (connect to GROUND RAIL)
+- OE ---- FIFO off control / "output enable" (connect to GROUND RAIL)
 
-- FIFO_WRST-FIFO ----- write pointer reset terminal
+- WRST (aka FIFO_WRST) ----- FIFO write pointer reset terminal
 
-- FIFO_RRST-FIFO ----- read pointer reset terminal
+- RRST (aka FIFO_RRST) ----- FIFO read pointer reset terminal
 
 <br/>
 
-Pin connections:
+**Pin connections**
 
-With Arduino Pro Mini
-doesn't use all the data pins
+The important parts are that the SIOC and SIOD pins are connected to the I2C pins of the microcontroller. 
+
+Of course 3V3 should be connected to an input voltage of 3.3V, and GND should be connected to Ground. 
+
+Some pins like HREF, STROBE, RST are unused, while OE should be connected to GND. My guess for why they are unused: OE (output enable) should always be pulled low (connected to ground). We don't need a STROBE light for our application. HREF for row synchronization may be redundant if we know the resolution from the register and have VSYNC for the start/end of the frame. RST is subsumed for our purposes by WRST and RRST. PWDN is also unused as you can just end the program or disconnect the device to power down.
+
+The rest of the pins can be connected to GPIO pins, mostly set as output. If your board doesn't have enough digital pins, you can of course connect them to Analog pins. Data comes in parallel from the eight D0-D7 pins.
+
+Here is an example of pin connections, using the Arduino Pro Mini. This is from the Arduvision code. Note that it doesn't use all the data pins (leaves the three pins D0:D2 unattached) and gives up some resolution/quality for faster processing.
+
 <center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="800"></center>
 
 <br/>
+
+Here is another example of pin connections, using the Arduino Mega 2560. This is from the book code. It uses all 8 data pins. 
+
+For this example, the Arduino Mega 2560 also is connected to an SD card reader by SPI. Different Arduinos have different dedicated pins for reading SPI; on the Mega 2560 it was 51-MOSI, 50-MISO, 52-SCK, 53-SS.
+
+<center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="800"></center>
+
+<br/>
+
+
 
 ### Timing diagrams:
 
