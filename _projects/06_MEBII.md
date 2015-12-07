@@ -67,7 +67,7 @@ Hm.... Do you have the right configuration? At the top, you're able to choose th
 Nurullah created PCB layouts, but since we couldn't get it to work, we didn't print them.
 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/gerber.jpg" width="300"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/gerber.jpg" width="750"></center>
 
 ## Challenges
 
@@ -75,7 +75,7 @@ Nurullah created PCB layouts, but since we couldn't get it to work, we didn't pr
 
 - The MEB-II came with a product error - we had to de-solder and remove a very small resistor with tweezers, and solder an extra wire connecting two pins in order to get the WiFi to work.
 
-<center><img src="http://i.imgur.com/sXaJaMT.jpg" width="400"></center>
+<center><img src="http://i.imgur.com/sXaJaMT.jpg" width="275"></center>
 
 - Finally, connecting to Northwestern networks was difficult - we couldn't connect because of firewalls or networking. Also, we couldn't use the Guest network. We worked around this by using our home network, turning a phone into a hotspot, or using the "RoboLab" network in the Masters in Robotics lab.
 

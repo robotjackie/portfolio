@@ -47,9 +47,9 @@ I tried various microcontrollers with the OV7670 with FIFO, including different 
 
 - Mega clone
 
-- Pro Mini)
+- Pro Mini
 
-- [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with built-in WiFi and online IDE). 
+- [Particle Photon](https://docs.particle.io/datasheets/photon-datasheet/) (Arduino-code compatible microprocessor with a built-in WiFi chip and online IDE). 
 
 I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
 
@@ -62,9 +62,9 @@ Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
 
-I also heavily leaned on code from a repo called Arduvision (see "Sources" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
+I also heavily leaned on code from a repo called Arduvision (see "Sources" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "Pins" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
-Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her code. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car, and had help from Spencer Williams.
+Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her writeup. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car. I also had help from Spencer Williams debugging the SD card reader.
 
 <br/>
 
@@ -72,9 +72,9 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 ### Register Settings
 
-There are many registers for this camera, and many register functions have multiple register locations and settings. A comprehensive list of each register and bit can be found in the datasheet listed in the "Sources" section of this page. While the hard way to change registers is that one could write functions to change a bit and mask the rest in a register, the easy way is that the Arduino library has a write function from its Wire library to simplify this task. As long as one knows the location of the register and its value, one can easily change the settings. Libraries for existing register settings can be found in the code from the book as well as some of the repos under "Sources."
+There are many registers for this camera, and many register functions have multiple registers and register values. A comprehensive list of each register and bit can be found in the datasheet listed in the "Sources" section of this page. The hard way to change registers is to write functions to change a bit and mask the others; the easy way if you're using an Arduino is the write function from its Wire library (see examples from the book code in "Sources"). In addition, libraries for the register settings can be found in the code from the book as well as some of the repos under "Sources."
 
-Registers are read and set by the I2C data line, and the clock pulse to the camera is supplied on the I2C clock line.
+Registers are read and set by the I2C data line (SDA), and the clock pulse to the camera is supplied on the I2C clock line (SCL).
 
 **Resolution**
 
@@ -82,15 +82,15 @@ The OV7670 camera has several options for resolution:
 
 - VGA (640x480 pixels)
 
-- QVGA (320x240 pixels)
+- QVGA (320x240 pixels), 1/4 the size of VGA
 
-- QQVGA (160x120 pixels)
+- QQVGA (160x120 pixels), 1/16 the size of VGA
 
 - and weird resolutions like CIF (352x288 pixels) and QCIF (176x144 pixels). 
 
 **Image format**
 
-The OV7670 can output various quality RGB, YUV, YCbCr, and Raw and processed Bayer formats. They will be covered below in "Image color formats."
+Image output formats can be changed from the register settings. The OV7670 can output various quality RGB, YUV, YCbCr, and Raw and processed Bayer formats. They will be covered more in detail below in "Image color formats."
 
 **Frames per second**
 
@@ -132,9 +132,9 @@ Here is how the camera works. First, light hits the lens (A) and is fed into the
 
 The first step in processing is analog processing (C), where AEC, AGC, ABLC etc. are applied. These settings can be automatic or manual, depending on the register settings (most likely they will be on automatic, for ease of use). Then other register settings (D) such as resolution, image format, frame rate etc. are called. These registers are read and changed from the SCCB interface (E) which is connected by I2C to the processor. There is also a register setting option of generating a test pattern (F).
 
-The next step in processing is that the analog signal is converted to a 10 bit digital signal by an ADC (G). Settings such as 50/60 Hz Auto Detect (H) and exposure/gain detection and control (I) are utilized, followed by a DSP (digital signal processor) (J) that handles white balance and color correction such as gamma control, saturation, and de-noising. This is also where a color matrix is applied to convert colors, with a fixed formula multiplying RGB values by a conversion matrix set by camera registers to return YUV values, for example (see "Image color formats" below). The last processing register is an image scaler (K) that scales down VGA quality to the other available resolutions.
+The next step in processing is that the analog signal is converted to a 10 bit digital signal by an ADC (G). Settings such as 50/60 Hz Auto Detect (H) and exposure/gain detection and control (I) are utilized, followed by a DSP (digital signal processor) (J) that handles white balance and color correction such as gamma control, saturation, and de-noising. This is also where a color matrix is applied to convert colors if needed, with a fixed formula multiplying RGB values by a conversion matrix set by camera registers to return YUV values, for example (see "Image color formats" below). The last processing register is an image scaler (K) that scales down VGA quality to the other available resolutions.
 
-The image then goes into the FIFO memory buffer (L), which as explained above can store 1 VGA-resolution image at 1 byte/pixel in raw Bayer format. Finally the image can be read out of the 8-pin video port (M) through pins D0-D7, at 1 bit per pin at a time, for a speed of 1 byte per read cycle from all 8 pins.
+The image then goes into the FIFO memory buffer (L), which as explained above can store 1 VGA-resolution image at 1 byte/pixel in raw Bayer format, or lower resolution images at higher byte/pixel in other formats. Finally the image can be read out of the 8-pin video port (M) through pins D0-D7, at 1 bit/pin at a time, for a speed of 1 byte/read cycle from all the pins.
 
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true" width="650"></center>
@@ -142,29 +142,28 @@ The image then goes into the FIFO memory buffer (L), which as explained above ca
 
 ### Pins: 
 
-(From electrodragon - see "Sources" at end)
 
 - 3V3 ----- input supply voltage (3V3)
 
 - GND ----- ground
 
-- SIO_C (aka SIOC) ----- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR)
+- SIO_C (aka SIOC) ----- SCCB interface control clock (Same/compatible with SCL on I2C. MAY NEED PULL-UP RESISTOR ON 5V MCU)
 
-- SIO_D (aka SIOD) ----- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR)
+- SIO_D (aka SIOD) ----- SCCB interface serial data (Same/compatible with SDA on I2C. MAY NEED PULL-UP RESISTOR ON 5V MCU)
 
 - VSYNC ----- frame synchronizing signal (input - pulses at beginning and end of each frame)
 
-- HREF ----- line synchronizing signal (unused)
+- HREF ----- line synchronizing signal (UNUSED)
 
 - D0-D7 ----- data port (input)
 
 - WEN (aka WR) ----- write enable to memory (output)
 
-- RST ----- reset port (triggered when LOW, output)
+- RST ----- reset port (triggered when LOW, UNUSED)
 
-- PWDN ----- power selection mode (triggered when HIGH, output)
+- PWDN ----- power selection mode (triggered when HIGH, UNUSED)
 
-- STROBE ----- camera flash control (unused)
+- STROBE ----- camera flash control (UNUSED)
 
 - RCK (aka RCLK) ----- FIFO memory read clock control terminal (output)
 
@@ -178,15 +177,17 @@ The image then goes into the FIFO memory buffer (L), which as explained above ca
 
 **Pin connections**
 
-The important parts are that the SIOC and SIOD pins are connected to the I2C pins of the microcontroller. 
+The camera's SCCB protocol is the same as I2C. So the SIOC and SIOD pins should be connected to the I2C pins of the microcontroller (SCL and SDA respectively). 
 
-Of course 3V3 should be connected to an input voltage of 3.3V, and GND should be connected to Ground. 
+3V3 should be connected to an input voltage of 3.3V, and GND should be connected to Ground. 
 
-Some pins like HREF, STROBE, RST are unused, while OE should be connected to GND. My guess for why they are unused: OE (output enable) should always be pulled low (connected to ground). We don't need a STROBE light for our application. HREF for row synchronization may be redundant if we know the resolution from the register and have VSYNC for the start/end of the frame. RST is subsumed for our purposes by WRST and RRST. PWDN is also unused as you can just end the program or disconnect the device to power down.
+Some pins like HREF, STROBE, RST are unused, while OE should be connected to GND. 
+
+My guess for why they are unused: OE (output enable) should always be pulled low (connected to ground). We don't need a STROBE light for our application. HREF for row synchronization may be redundant if we know the resolution from the register and have VSYNC for the start/end of the frame. RST is subsumed for our purposes by WRST and RRST. PWDN is also unused as you can just end the program or disconnect the device to power down.
 
 The rest of the pins can be connected to GPIO pins, mostly set as output. If your board doesn't have enough digital pins, you can of course connect them to Analog pins. Data comes in parallel from the eight D0-D7 pins.
 
-Here is an example of pin connections, using the Arduino Pro Mini. This is from the Arduvision code. Note that it doesn't use all the data pins (leaves the three pins D0:D2 unattached) and gives up some resolution/quality for faster processing.
+Here is an example of pin connections, using the Arduino Pro Mini. This is from the Arduvision code. Note that it doesn't use all the data pins (leaves the three pins D0:D2 unattached) and gives up some quality for faster processing.
 
 <center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="800"></center>
 
@@ -194,7 +195,7 @@ Here is an example of pin connections, using the Arduino Pro Mini. This is from 
 
 Here is another example of pin connections, using the Arduino Mega 2560. This is from the book code. It uses all 8 data pins. 
 
-For this example, the Arduino Mega 2560 also is connected to an SD card reader by SPI. Different Arduinos have different dedicated pins for reading SPI; on the Mega 2560 it was 51-MOSI, 50-MISO, 52-SCK, 53-SS.
+Here, the Arduino Mega 2560 is also connected to an SD card reader by the SPI protocol. Different Arduinos have different dedicated pins for interfacing with SPI; on the Mega 2560 it was 51-MOSI, 50-MISO, 52-SCK, 53-SS (not shown in the image below).
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_mega_pins.jpg?raw=true" width="800"></center>
 
@@ -204,7 +205,7 @@ For this example, the Arduino Mega 2560 also is connected to an SD card reader b
 
 ### Timing diagrams:
 
-Here is how the timing works to read image bits from the camera sensor, write them to the FIFO memory chip, and then pull them off of the memory chip onto the microprocessor. This is how it works for one frame.
+Here is how the timings work. Different pins must be brought to high or low to read image bits from the camera sensor, write them to the FIFO memory chip, and then pull them off of the memory chip onto the microprocessor. Below is the sequence for one frame.
 
 - At the beginning of the frame, VSYNC is pulsed high, then returns to low. 
 
@@ -218,7 +219,7 @@ Here is how the timing works to read image bits from the camera sensor, write th
 
 - Finally, Write Enable must be set to low to stop writing any more data to memory.
 
-<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700"></center>
+<center><img src="http://2.bp.blogspot.com/-K-OIuy-inUU/UA2gp3SYgYI/AAAAAAAAAPg/Gure3RWI8G4/s1600/href.png" width="700"></center>
 
 <br/>
 
@@ -238,7 +239,7 @@ There are several different options for image color formats outputted by the cam
 
 - The RGB formats used by the OV7670 are the RGB565, RGB555 and RGB444. 
 
-- RGB565 is 5 bits for R, 6 bits for G, and 5 bits for B. So that means Red is split up into 2^5=32 different levels of red, Green into 2^6=64, etc.
+- The numbers correspond to the bits used to store each color, for one pixel. For example RGB565 uses 5 bits for R, 6 bits for G, and 5 bits for B. 
 
 - In addition there are formats with Y (luminance), such as YCbCr and YUV. In these formats, the Y itself is the black and white version of the image, while the other values add color. The UV from YUV are from a color plane, while CbCr refer to blue and red components. 
 
@@ -250,7 +251,7 @@ The following function can convert YCbCr to RGB:
 
 <br/>
 
-Specifically, the OV7670 uses a YCbCr422 format. This is a strange format where 1 byte is given to Y, Cb, and Cr each, which seems like each pixel is 3 bytes. But two consecutive pixels share the same Cb and Cr values. So for two pixels, there is Y1, Y2, Cb1, Cr1, which is 4 bytes per 2 pixels, or an average of 2 bytes/pixel. 
+Specifically, the OV7670 uses a YCbCr422 format. This is a strange format where 1 byte is given to Y, Cb, and Cr each, which makes it seem like each pixel is 3 bytes. But two consecutive pixels share the same Cb and Cr values. So for two pixels, there are only four values, Y1, Y2, Cb1, Cr1, which is 4 bytes per 2 pixels, or an average of 2 bytes/pixel. 
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/YCbCr_pixels.jpg?raw=true"></center>
 
@@ -292,22 +293,21 @@ Below is the image quality from pictures taken with the book's code. (In the rig
 
 <br/>
 
-#### Output format: YUV 
-
-<br/>
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
-This was one YUV-format image in QQVGA resolution that was saved to the SD card. It is 2400 lines. Each line has 8 "words," with each word a 4-digit hexadecimal. Since 1 hex character is half a byte, each "word" is 2 bytes. 
+This was one of the blue images above, taken with the camera running the book code. It is a YUV-format image in QQVGA resolution that was saved to the SD card. It is 2400 lines. Each line has 8 "words," with each word a 4-digit hexadecimal. Since 1 hex character is half a byte, each 4-hex "word" is 2 bytes. 
 
 2 bytes/word * 8 words/line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
 
-This confirms that each "word" was actually a pixel, and each pixel took up 2 bytes, which is what I had set in the code.
+This confirms that each 2-byte "word" was actually a pixel, which is what I had set in the code.
+
+<br/>
 
 
 ## Challenges
 
-- The biggest difficulty was that while I could get light blob detection to work, I couldn't get clear image quality. I tried changing register settings, only reading luminance (black and white), rewriting the code, turning the camera focus knob, trying different code libraries, and switching cameras in case I had a bad camera, without success. I'm not sure why it didn't work and why image quality was so blurry.
+The biggest difficulty was that while I could get light blob detection to work, I couldn't get clear image quality. I tried changing register settings, only reading luminance (black and white), rewriting the code, turning the camera focus knob, trying different code libraries, and switching cameras in case I had a bad camera, without success. I'm not sure why it didn't work and why image quality was so blurry.
 
 - Be careful: Some libraries say "OV7670" in the name of the file, but you have to look at the code and description carefully. Some libraries titled "OV7670" are mislabeled and for other cameras, like OV7076, or other cameras starting with "OV." 
 
@@ -325,23 +325,23 @@ This confirms that each "word" was actually a pixel, and each pixel took up 2 by
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
-- Some Arduinos are 3.3V while others are 5V. I thought I could use a 5V Arduino but power the camera with the 3V3 pin. However, I2C on a 5V Arduino uses 5V, and low from the Arduino can still pull the camera pins to high. I used 4.7K pull-up resistors for this Arduino. 
+- Some Arduinos are 3.3V while others are 5V. I thought I could use a 5V Arduino and just power the camera with the 3V3 pin. However, I2C on a 5V Arduino still uses 5V, and low from the Arduino can still pull the camera pins to high, or high from the camera can still be read as low to the Arduino. I used 4.7K pull-up resistors for this Arduino. 
 
-- I read online that using 5V power may burn the image sensors, so just in case I accidentally did that, I switched with Athulya's camera. It made no difference in image quality.
+- I read online that using 5V power may burn the image sensors, so just in case I accidentally had done that, I switched with Athulya's camera. But it made no difference in image quality.
 
-- Some pins are pull-LOW to activate, while others are pull-HIGH. This is documented in the code libraries, but could be tricky if one is writing the code from scratch and not noticed.
+- Some pins are pull-LOW to activate, while others are pull-HIGH to turn on. This is documented in the code libraries, but could be tricky if one is writing the code from scratch and did not notice the difference.
 
 - If you're writing the registers from scratch, the register "0xB0" is listed as "Reserved" in the OV7670 reference documentation. However, an addendum document "OV7670 Software Application Note" specifies that this undocumented register should be set to the value "0x84" for YCbCr. 
 
-- I solved some other funny SD card problems, such as taking 70 seconds to write one image, then 0 seconds for 2 following images, or re-writing over old images. Then the SD sample code wouldn't run. I tried using shorter wires and reformatting the 4GB SD card with FAT32. It also turned out my SD card reader was fragile / somewhat broken. I used a rubber band to hold it together. 
+- I solved some other funny SD card problems. The sample Arduino SD sketch wouldn't run, so I tried using shorter wires between the SD card reader and the Arduino, and reformatting the 4GB SD card with FAT32, which allowed the sketch to run. But sometimes the SD card was taking 70 seconds to write one image, then 0 seconds for 2 following images; sometimes it re-wrote over old images. It turned out my SD card reader was somewhat broken/fragile, so I used a rubber band to hold it together. 
 
-- Another problem was that the book code too large for an Arduino Nano clone, so I had to switch Arduinos to the Mega 2560 that the book originally listed.
+- Another problem was that the book code was too large to fit on an Arduino Nano clone, so I had to switch Arduinos to the Mega 2560 that the book originally listed.
 
-- My cheap Arduino Mega 2560 clone failed to compile and kept giving me firmware errors. From online advice, I could reinstall the Arduino firmware with dfu-programmer, but decided to just borrow my friend's authentic Mega 2560. This solved the problems.
+- My cheap Arduino Mega 2560 clone failed to compile and kept giving me firmware errors. From online advice, I could reinstall the Arduino firmware with dfu-programmer, but decided to just borrow my friend's authentic Mega 2560. 
 
-- For fun, I used a Particle Photon (basically a WiFi-enabled Arduino) with the camera as well, and was not able to get anything, not even debugging print statements. There is a bug with the Photon where I2C pulled low will not reset itself, which causes the status of the Photon to be stuck always blinking green. It can't seem to do anything in this mode - unable to flash new programs or even connect to the Internet or Serial. To solve the I2C issue, I manually pulled up the Photon I2C pins by holding wires connected to 3V3 to both Photon I2C pins, rebooting the Photon to Safe Mode.
+- For fun, I used a Particle Photon (basically a WiFi-enabled Arduino) with the camera as well, and was not able to get anything, not even debugging print statements. There is a bug with the Photon where I2C pulled low will not reset itself, which causes the status of the Photon to be stuck, always blinking its green LED. It can't seem to do anything in this mode - unable to flash new programs or even connect to the Internet or Serial. To solve the I2C issue, I manually pulled up the Photon I2C pins by holding wires connected to 3V3 to both Photon I2C pins, rebooting the Photon to Safe Mode. 
 
-- When YUV-format images were finally pulled from the SD card, we tried many different software and online apps. We finally used a 15-day free trial of software called "All to Real Converter Standard" to convert the images to JPG. This was the only one that worked, and it was not very convenient. 
+- When YUV-format images were finally pulled from the SD card, we tried many different software and online apps to read the YUV file format. We finally used a 15-day free trial of software called "All to Real Converter Standard" to convert the images to JPG. This was the only one that worked, and it was not very convenient. Afterward we learned that FFMPEG could do this conversion as well.
 
 <br/>
 
