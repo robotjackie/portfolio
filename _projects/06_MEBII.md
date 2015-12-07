@@ -6,15 +6,15 @@ image: microchip_back.jpg
 ---
 
 ## Overview
-Branching off of the experience of using the PIC32MX in our Mechatronics class, we tried to get its more powerful cousin, the **PIC32MZ**s, to stream video to the cloud. We wrote code in C for the PIC32MZ development board as well as Java code for Amazon Web Services. The motivation was that we would be able to remotely stream camera feed onto the cloud, and display that video in an Android app in real-time, making our own "security camera." I worked with Nurullah Gulmus and Ed Kim.
+Branching off of the experience of using the PIC32MX in our Mechatronics class, we tried to get its more powerful cousin, the **PIC32MZ**, to stream video to the cloud. We wrote code in C for the PIC32MZ development board as well as Java code for Amazon Web Services. The motivation was making our own "security camera": that we would be able to remotely stream camera feed onto the cloud and display that video in an Android app in real-time. I worked with Nurullah Gulmus and Ed Kim.
 
-The folks at Arrow Electronics were nice enough to donate a Multimedia Evaluation Board-II (**MEB-II**) with the PIC32MZ microprocessor, OV7690 camera, and a WiFi chip. The board uses Harmony, a system of libraries and drivers for different peripherals. The project profile picture shows the MEB-II from the back, with the Microchip Starter Board attached. This is the front of the board, with a display screen.
+The folks at Arrow Electronics were nice enough to donate a Multimedia Evaluation Board-II (**MEB-II**) to us. This board comes pre-assembled with all the peripherals that we needed: the PIC32MZ microprocessor, OV7690 camera, a display, and a WiFi chip. It also has many other functions we did not use, such as an accelerometer, headphone/speaker jack, Bluetooth, and more. The project profile picture shows the MEB-II from the back, with the Microchip Starter Board attached. This is the front of the board, with a display screen.
 
-<center><img src="http://i.imgur.com/rWGBN0E.jpg" width="400"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/microchip_front.jpg" width="400"></center>
 
 ## Results
 
-We were able to get each individual component of the MEB-II to work: display, camera, data packets sent over by the WiFi chip, Smart Config WiFi provisioning, TCP/IP-UDP, and Amazon Web Services server. Below is a "selfie" taken by the on-board camera:
+The microprocessor relies on Harmony, a system of libraries and drivers for different peripherals. We were able to use its sample code to get each individual component of the MEB-II to work: display, camera, data packets sent over by the WiFi chip, Smart Config WiFi provisioning, TCP/IP-UDP, and Amazon Web Services server. Below is a "selfie" taken by the on-board camera:
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_selfie.jpg" width="300"></center>
 
