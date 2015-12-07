@@ -14,6 +14,6 @@ Any computer or smartphone with internet connection could control our turtlesim 
 While this presents security problems, it was a learning exercise that taught me and Athulya how to use send ROS over Wi-Fi. This has implications for any sort of app or website that tele-operates ROS-based systems.
 
 ### GitHub
-More details on [RWebTools](https://github.com/athulyasimon/rwebtools)
+More details on [GitHub](https://github.com/athulyasimon/rwebtools)
 
 

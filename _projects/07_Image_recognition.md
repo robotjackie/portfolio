@@ -32,4 +32,4 @@ We also ran into challenges with the mobile app, in printing a screenshot of the
 
 
 ## Github
-[GitHub repo](https://github.com/AwesomeShayne/CamerAzure/tree/dev)
+Learn more on our [GitHub repo](https://github.com/AwesomeShayne/CamerAzure/tree/dev)

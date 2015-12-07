@@ -83,6 +83,9 @@ Product error - had to remove a resistor and solder a wire in order to get WiFi 
 Northwestern networks were difficult - couldn't connect. Also, couldn't use Guest Network. Had to use home network or turn phone into a hotspot.
 
 ### Sources
+(1) [Our GitHub repo](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/jackie/firmware) with the PIC32MZ code
+
+(2) Our [GitHub](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/Nurullah's%20Socket%20Board%20Designs) link for our socket board designs
 Code
 
-GitHub
+(3) Microchip [MEB-II documentation](http://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=dm320005-2&utm_source=&utm_medium=MicroSolutions&utm_term=&utm_content=DevTools&utm_campaign=Multimedia+Expansion+Board+II)
