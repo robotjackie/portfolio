@@ -74,6 +74,8 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 There are many registers for this camera, and many register functions have multiple register locations and settings. A comprehensive list of each register and bit can be found in the datasheet listed in the "Sources" section of this page. While the hard way to change registers is that one could write functions to change a bit and mask the rest in a register, the easy way is that the Arduino library has a write function from its Wire library to simplify this task. As long as one knows the location of the register and its value, one can easily change the settings. Libraries for existing register settings can be found in the code from the book as well as some of the repos under "Sources."
 
+Registers are read and set by the I2C data line, and the clock pulse to the camera is supplied on the I2C clock line.
+
 **Resolution**
 
 The OV7670 camera has several options for resolution: 
@@ -194,7 +196,7 @@ Here is another example of pin connections, using the Arduino Mega 2560. This is
 
 For this example, the Arduino Mega 2560 also is connected to an SD card reader by SPI. Different Arduinos have different dedicated pins for reading SPI; on the Mega 2560 it was 51-MOSI, 50-MISO, 52-SCK, 53-SS.
 
-<center><img src="http://2.bp.blogspot.com/-AC4P0mwMXkk/VCb21n9EIZI/AAAAAAAABAI/jdVbCIMCVhk/s1600/conections.png" width="800"></center>
+<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_mega_pins.jpg?raw=true" width="800"></center>
 
 <br/>
 
@@ -216,7 +218,7 @@ Here is how the timing works to read image bits from the camera sensor, write th
 
 - Finally, Write Enable must be set to low to stop writing any more data to memory.
 
-<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700">
+<center><img src="http://www.electrodragon.com/w/images/7/7f/7670_sequence.jpg" width="700"></center>
 
 <br/>
 
@@ -224,7 +226,9 @@ Here is how the timing works to read image bits from the camera sensor, write th
 
 - Each clock cycle from RCK reads 1 bit from each of the 8 data ports, meaning up to 1 byte is read in total each cycle. 
 
-<img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
+<br/>
+
+<center><img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
 
 <br/>
 
@@ -232,14 +236,19 @@ Here is how the timing works to read image bits from the camera sensor, write th
 
 There are several different options for image color formats outputted by the camera. These are versions of RGB, YUV, YCbCr, and raw/processed Bayer. 
 
-The RGB formats used by the OV7670 are the RGB565, RGB555 and RGB444. 
-RGB565 is 5 bits for R, 6 bits for G, and 5 bits for B. So that means Red is split up into 2^5=32 different levels of red, Green into 2^6=64, etc.
+- The RGB formats used by the OV7670 are the RGB565, RGB555 and RGB444. 
 
-In addition there are formats with Y (luminance), such as YCbCr and YUV. In these formats, the Y itself is the black and white version of the image, while the other values add color. The UV from YUV are from a color plane, while CbCr refer to blue and red components. 
+- RGB565 is 5 bits for R, 6 bits for G, and 5 bits for B. So that means Red is split up into 2^5=32 different levels of red, Green into 2^6=64, etc.
+
+- In addition there are formats with Y (luminance), such as YCbCr and YUV. In these formats, the Y itself is the black and white version of the image, while the other values add color. The UV from YUV are from a color plane, while CbCr refer to blue and red components. 
 
 The following function can convert YCbCr to RGB:
 
+<br/>
+
 <center><img src="https://upload.wikimedia.org/wikipedia/en/math/4/e/b/4ebf7992636ec7100e2f0f68a4f2c2ca.png"></center>
+
+<br/>
 
 Specifically, the OV7670 uses a YCbCr422 format. This is a strange format where 1 byte is given to Y, Cb, and Cr each, which seems like each pixel is 3 bytes. But two consecutive pixels share the same Cb and Cr values. So for two pixels, there is Y1, Y2, Cb1, Cr1, which is 4 bytes per 2 pixels, or an average of 2 bytes/pixel. 
 
@@ -289,11 +298,7 @@ Below is the image quality from pictures taken with the book's code. (In the rig
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
 
-This was one YUV-format image in QQVGA resolution that was saved to the SD card. 
-
-It is 2400 lines. Each line has 8 "words," with each word a 4-digit hexadecimal.
-
-Since 1 hex character is half a byte, each "word" is 2 bytes.
+This was one YUV-format image in QQVGA resolution that was saved to the SD card. It is 2400 lines. Each line has 8 "words," with each word a 4-digit hexadecimal. Since 1 hex character is half a byte, each "word" is 2 bytes. 
 
 2 bytes/word * 8 words/line * 2400 lines = 19200, which is the QQVGA resolution (120x160).
 
@@ -312,7 +317,11 @@ This confirms that each "word" was actually a pixel, and each pixel took up 2 by
 
 - From the Arduvision blog:
 
-Change the line "static const unsigned long _BAUDRATE = 500000;" in the Arduino code, and the line "public final static int BAUDRATE = 500000;" in the globalDefinitions.java file of the Processing sketch. Try with substituting the **500000** for **115200**.
+- In the Arduino code, change the line "static const unsigned long _BAUDRATE = 500000;" 
+
+- In the globalDefinitions.java file of the Processing sketch, change the line "public final static int BAUDRATE = 500000;"  
+
+- Try with substituting the **500000** for **115200**.
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
