@@ -16,7 +16,7 @@ The folks at Arrow Electronics were nice enough to donate a Multimedia Evaluatio
 
 The microprocessor relies on Harmony, a system of libraries and drivers for different peripherals. We were able to use its sample code to get each individual component of the MEB-II to work: display, camera, data packets sent over by the WiFi chip, Smart Config WiFi provisioning, TCP/IP-UDP, and Amazon Web Services server. Below is a "selfie" taken by the on-board camera:
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_selfie.jpg" width="300"></center>
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_selfie.jpg" width="600"></center>
 
 However, we ran into trouble trying to combine the different parts. There were many errors, no debugger, and slow firmware upload time. 
 
@@ -32,7 +32,7 @@ As far as hardware goes, [this is the one needed when soldering.](http://ww1.mic
 
 The demonstrations are all outlined in the Harmony PDF. The ones we used were *gfx_camera*, *tcpip_udp_client*, and *wifi_easy_configuration*. 
 
-- *gfx_camera* writes to a frame buffer array and has a callback for horizontal and vertical sync ([detailed here](http://www.ovt.com/uploads/parts/OVM7690_PB(1.0)_web.pdf)). The plan was to transform those into RTP packets and send them over with the WiFi and TCP/IP client code.
+*gfx_camera* writes to a frame buffer array and has a callback for horizontal and vertical sync ([detailed here](http://www.ovt.com/uploads/parts/OVM7690_PB(1.0)_web.pdf)). The plan was to transform those into RTP packets and send them over with the WiFi and TCP/IP client code.
 
 We also had an Amazon Web Services (AWS) server that receives payloads of [this RTP format](https://tools.ietf.org/html/rfc4421). 
 
@@ -48,7 +48,7 @@ We also had an Amazon Web Services (AWS) server that receives payloads of [this 
 
 5) Make and Install Program, choosing the Starter Kit as the ICE
 
-Make sure the PIC version is pic32mz2048**ech144**.
+Make sure the PIC version is PIC32MZ2048**ECH144**.
 
 ## PCB layouts
 
@@ -60,13 +60,13 @@ We were optimistic that once we got the code running on the development board, w
 
 ## Challenges
 
-- The biggest challenge is that the Microchip Harmony code base and community. The code base is not well maintained, the sample code is poorly documented and very long; the reference was 8,000 pages for just 1 document. Their online forums are not very active or helpful for us. Technical support is lacking, and it took them weeks to respond, where never answered our question or solved our issues. This made is extremely frustrating to use Harmony and the Microchip environment.
+- The biggest challenge is that the **Microchip Harmony code base and community**. The code base is not well maintained, the sample code is poorly documented and very long; the reference was 8,000 pages for just 1 document. Their online forums are not very active or helpful for us. Technical support is lacking, and it took them weeks to respond, where never answered our question or solved our issues. This made is **extremely frustrating** to use Harmony and the Microchip environment.
 
 - The MEB-II came with a product error - we had to de-solder and remove a very small resistor with tweezers, and solder an extra wire connecting two pins in order to get the WiFi to work.
 
 <center><img src="http://i.imgur.com/sXaJaMT.jpg" width="275"></center>
 
-- Finally, connecting to Northwestern networks was difficult - we couldn't connect because of firewalls or networking. Also, we couldn't use the Guest network. We worked around this by using our home network, turning a phone into a hotspot, or using the "RoboLab" network in the Masters in Robotics lab.
+- Finally, connecting to Northwestern networks was difficult - we couldn't connect because of firewalls or networking. Also, we couldn't use the Guest network because we couldn't fill in fields. We worked around this by using our home network, turning a phone into a hotspot, or using the "RoboLab" network in the Masters in Robotics lab.
 
 <br/>
 
@@ -74,6 +74,6 @@ We were optimistic that once we got the code running on the development board, w
 
 (1) [Our GitHub repo](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/jackie/firmware) with the PIC32MZ code
 
-(2) Our [GitHub](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/Nurullah's%20Socket%20Board%20Designs) link for our socket board designs
+(2) [GitHub](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/Nurullah's%20Socket%20Board%20Designs) link for our socket board designs
 
 (3) Microchip [MEB-II documentation](http://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=dm320005-2&utm_source=&utm_medium=MicroSolutions&utm_term=&utm_content=DevTools&utm_campaign=Multimedia+Expansion+Board+II)
