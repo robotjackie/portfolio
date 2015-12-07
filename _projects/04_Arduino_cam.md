@@ -274,7 +274,7 @@ At first I only got garbage. It looked like part of the image was being read and
 
 <br/>
 
-Luckily, the light blob detection from the Arduvision library worked. It refreshed at about 2-3 fps and displayed a light blob from lighting sources, such as the overhead light in the room or my mobile camera's flash, and it displayed dark blobs when the light sources were covered. For some reason everything had a green-ish tinge. 
+Luckily, the **light blob detection** from the Arduvision library **worked**. It refreshed at about 2-3 fps and displayed a light blob from lighting sources, such as the overhead light in the room or my mobile camera's flash, and it displayed dark blobs when the light sources were covered. For some reason everything had a green-ish tinge. 
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="450">
 <img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="450">
@@ -282,7 +282,7 @@ Luckily, the light blob detection from the Arduvision library worked. It refresh
 
 <br/>
 
-However, the code from the _Beginning OV7670 with Arduino_ book did not work well. There were many problems (listed below in "Challenges"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. 
+However, the code from the "Beginning OV7670 with Arduino" book did not work well. There were many problems (listed below in "Challenges"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. 
 
 Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) As you can see it is quite blurry. I tried manually changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library. I couldn't figure out why it didn't give me quality camera feed.
 
@@ -317,11 +317,11 @@ This confirms that each "word" was actually a pixel, and each pixel took up 2 by
 
 - From the Arduvision blog:
 
-- In the Arduino code, change the line "static const unsigned long _BAUDRATE = 500000;" 
+  - In the Arduino code, change the line "static const unsigned long _BAUDRATE = 500000;" 
 
-- In the globalDefinitions.java file of the Processing sketch, change the line "public final static int BAUDRATE = 500000;"  
+  - In the globalDefinitions.java file of the Processing sketch, change the line "public final static int BAUDRATE = 500000;"  
 
-- Try with substituting the **500000** for **115200**.
+  - Try with substituting the **500000** for **115200**.
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
