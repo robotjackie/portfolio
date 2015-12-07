@@ -66,23 +66,21 @@ Hm.... Do you have the right configuration? At the top, you're able to choose th
 
 Nurullah created PCB layouts, but since we couldn't get it to work, we didn't print them.
 
+
+<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/gerber.jpg" width="300"></center>
+
 ## Challenges
 
-Microchip is very poorly maintained
+- The biggest challenge is that the Microchip code base and community are not helpful. The code base is not well maintained. The sample code is poorly documented and very long; the reference was 8,000 pages for just 1 document. Their online forums are not very active or helpful for our project. Technical support is lacking and took weeks for a response; they never answered our question or solved our issues. This made is extremely frustrating to use Harmony and the Microchip environment.
 
-Technical support is lacking and takes weeks
-
-Forums are not helpful
-
-Code is poorly documented and long
-
-Product error - had to remove a resistor and solder a wire in order to get WiFi to work
+- The MEB-II came with a product error - we had to de-solder and remove a very small resistor with tweezers, and solder an extra wire connecting two pins in order to get the WiFi to work.
 
 <center><img src="http://i.imgur.com/sXaJaMT.jpg" width="400"></center>
 
-Northwestern networks were difficult - couldn't connect. Also, couldn't use Guest Network. Had to use home network or turn phone into a hotspot.
+- Finally, connecting to Northwestern networks was difficult - we couldn't connect because of firewalls or networking. Also, we couldn't use the Guest network. We worked around this by using our home network, turning a phone into a hotspot, or using the "RoboLab" network in the Masters in Robotics lab.
 
 ### Sources
+
 (1) [Our GitHub repo](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/jackie/firmware) with the PIC32MZ code
 
 (2) Our [GitHub](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/Nurullah's%20Socket%20Board%20Designs) link for our socket board designs
