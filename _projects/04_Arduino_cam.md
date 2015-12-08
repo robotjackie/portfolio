@@ -6,15 +6,17 @@ image: mega2560_ov7670_side.jpg
 ---
 
 ## Overview
-For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect blobs. I partially succeeded in that I could detect blobs of light, but I was not successful in getting quality images or video stream from the camera.
+For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect light blobs. I ran firmware in C on Arduinos and the Particle Photon, as well as code on the computer to display the video stream in Processing.
 
-<br/>
-
-<center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
+I succeeded in that I could detect blobs of light. But I was not successful in getting quality images or video stream from the camera.
 
 ### STATUS: Not maintained. 
 
 #### Please don't contact me about this project, unless you know how to make it work better.
+
+<br/>
+
+<center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
 
 <br/>
 
@@ -66,7 +68,7 @@ Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera
 
 I also heavily leaned on code from a repo called Arduvision (see "Sources" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "Pins" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
-Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her writeup. I also worked with my classmate Athulya Simon, who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car. I also had help from Spencer Williams debugging the SD card reader.
+Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her writeup. I also worked with my classmate [Athulya Simon](http://athulyasimon.github.io/project_portfolio/), who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car. I also had help from Spencer Williams debugging the SD card reader.
 
 <br/>
 

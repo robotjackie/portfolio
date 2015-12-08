@@ -6,15 +6,17 @@ image: project_smarthome.jpg
 ---
 
 ## Overview
-(The code is on a [private repo](https://github.com/robotjackie/tinyos_smarthome) because it contains our solutions for class assignments.)
-
 **Smarthome product** have made their appearance in the mass market around the late 2000s, and more and more consumers begin to adopt them. The idea that everyday household tasks could be abstracted by intelligent devices, and that one could get feedback on their use and energy consumption, has enthralled many homeowners. 
 
-To gain experience in this area, my classmate Akshat Thirani and I worked together to code small, battery-powered embedded devices called TelosB motes to measure light, humidity, and temperature. 
+To gain experience in this area, my classmate [Akshat Thirani](https://www.linkedin.com/in/akshatthirani) and I worked together to code small, battery-powered embedded devices called TelosB motes to measure light, humidity, and temperature. 
 
 We placed these motes in different parts of the house to simulate different conditions (e.g. a mote in the fridge to detect temperature, opening/closing the window shades to simulate day and night). We also demonstrated that these motes could communicate to each other through a sensor network and trigger events based on their sensor readings, to blink lights based on sensor data.
 
 #### Status - NOT MAINTAINED. Please don't message me about this project.
+
+(The code is on a [private repo](https://github.com/robotjackie/tinyos_smarthome) because it contains our solutions for class assignments.)
+
+<br/>
 
 <center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true" alt="Example of a TelosB mote" width="350"></center>
 
