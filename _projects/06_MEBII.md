@@ -1,14 +1,14 @@
 ---
 layout: project
 title: Security Camera Networking Project
-date: February 20, 2015
+date: August 2015
 image: microchip_back.jpg
 ---
 
 ## Overview
-Branching off of the experience of using the PIC32MX in our Mechatronics class, we tried to get its more powerful cousin, the **PIC32MZ**, to stream video to the cloud. We wrote code in C for the PIC32MZ development board as well as Java code for Amazon Web Services. The motivation was making our own "security camera": that we would be able to remotely stream camera feed onto the cloud and display that video in an Android app in real-time. I worked with Nurullah Gulmus and Ed Kim.
+Branching off of the experience of using the PIC32MX in our Mechatronics class, we tried to get its more powerful cousin, the **PIC32MZ**, to stream video to the cloud. We wrote code in C for the PIC32MZ development board as well as Java code for **Amazon Web Services**. The motivation was making our own "security camera": that we would be able to remotely stream camera feed onto the cloud and display that video in an Android app in real-time. I worked with Nurullah Gulmus and Ed Kim.
 
-The folks at Arrow Electronics were nice enough to donate a Multimedia Evaluation Board-II (**MEB-II**) to us. This board comes pre-assembled with all the peripherals that we needed: the PIC32MZ microprocessor, OV7690 camera, a display, and a WiFi chip. It also has many other functions we did not use, such as an accelerometer, headphone/speaker jack, Bluetooth, and more. The project profile picture shows the MEB-II from the back, with the Microchip Starter Board attached. This is the front of the board, with a display screen.
+The folks at Arrow Electronics were nice enough to donate a **Multimedia Evaluation Board-II** (**MEB-II**) to us. This board comes pre-assembled with all the peripherals that we needed: the PIC32MZ microprocessor, OV7690 camera, a display, and a WiFi chip. It also has many other functions we did not use, such as an accelerometer, headphone/speaker jack, Bluetooth, and more. The project profile picture shows the MEB-II from the back, with the Microchip Starter Board attached. This is the front of the board, with a display screen.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/microchip_front.jpg" width="400"></center>
 
@@ -18,7 +18,7 @@ The microprocessor relies on Harmony, a system of libraries and drivers for diff
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_selfie.jpg" width="600"></center>
 
-However, we ran into trouble trying to combine the different parts. There were many errors, no debugger, and slow firmware upload time. 
+However, we ran into trouble trying to combine the different parts. There were many errors, no debugger, and slow firmware upload time (see "Challenges"). 
 
 <br/>
 

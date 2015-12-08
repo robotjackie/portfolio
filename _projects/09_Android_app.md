@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Beginner Android App
-date: Jan 15, 2015 - Current
+date: Jan 15, 2015
 image: app_mockup.png
 ---
 

@@ -1,14 +1,9 @@
 ---
 layout: project
 title: Light Blob Detection with $5 Camera
-date: February 20, 2015
+date: November 30, 2015
 image: mega2560_ov7670_side.jpg
 ---
-### STATUS: Not maintained. 
-
-#### Please don't contact me about this project, unless you know how to make it work better.
-
-<br/>
 
 ## Overview
 For this project I tried to get an Omnivision 7670 camera working with various microcontrollers in order to detect blobs. I partially succeeded in that I could detect blobs of light, but I was not successful in getting quality images or video stream from the camera.
@@ -16,6 +11,13 @@ For this project I tried to get an Omnivision 7670 camera working with various m
 <br/>
 
 <center><img src="http://i.imgur.com/7FdYsBd.jpg?1" height="700"></center>
+
+### STATUS: Not maintained. 
+
+#### Please don't contact me about this project, unless you know how to make it work better.
+
+<br/>
+
 
 The Omnivision OV7670 camera is a cheap, mobile-phone quality CMOS camera that in bulk sells for under $5 from Chinese suppliers on Alibaba. The camera is supposed to be able to stream VGA 640x480 resolution video at 30 frames per second. There are different libraries and projects written online to interface this camera with various microcontrollers, including Arduinos. The camera can take 3.3V input, and some online claim that 5V input may burn the image sensors.
 

@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Hacking Control of RC Drones
-date: February 20, 2015
+date: July 2015
 image: nRF_arduino.jpg
 ---
 

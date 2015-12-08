@@ -1,7 +1,7 @@
 # Site settings
-title:              Portfolio Template
+title:              Jackie Wu - MS Robotics
 email:              jwu@u.northwestern.edu
-description:        "Portfolio template for students in the MSR program at Northwestern University"
+description:        "Jackie Wu's portfolio for the MS Robotics program at Northwestern University, 2014-2015"
 url:                "http://localhost:4000"
 baseurl:            /portfolio
 

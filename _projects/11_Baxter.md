@@ -1,7 +1,7 @@
 ---
 layout: project
 title: Baxter item sort
-date: February 20, 2015
+date: December 13, 2014
 image: baxter_profile.jpg
 ---
 
