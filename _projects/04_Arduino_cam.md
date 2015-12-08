@@ -2,7 +2,7 @@
 layout: project
 title: Light Blob Detection with $5 Camera
 date: November 30, 2015
-image: mega2560_ov7670_side.jpg
+image: mega2560_ov7670_side_50per.jpg
 ---
 
 ## Overview

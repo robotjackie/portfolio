@@ -2,7 +2,7 @@
 layout: project
 title: Smarthome/IoT Motes
 date: June 2015
-image: project_smarthome.jpg
+image: project_smarthome_50per.jpg
 ---
 
 ## Overview

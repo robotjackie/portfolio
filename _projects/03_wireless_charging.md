@@ -2,7 +2,7 @@
 layout: project
 title: Wireless Charging Video Drone Prototype
 date: February 20, 2015
-image: wireless_charge.jpg
+image: wireless_charge_50per.jpg
 ---
 
 ## Overview
