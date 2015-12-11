@@ -27,7 +27,7 @@ It is written in nesC, a dialect of C, and firmware comprises a .nc main file, .
 
 Our project was to design and program a TinyOS application to run on two TelosB motes, utilizing the built-in light, temperature, and humidity sensors to provide real-time notifications, and “display” the notification on the on-board available LEDs. In addition, one mote would transmit temperature data from its sensor to the other, and the second mote would transfer light data to the first, triggering the blinking of different LEDs. While we used 2 motes, our code could be expanded to include more motes for more sensors or event triggers.
 
-<center><img src="../../public/images/tiny_mote_description.jpg" width="450"></center>
+![](../../public/images/tiny_mote_description.jpg)
 
 
 ### Method
