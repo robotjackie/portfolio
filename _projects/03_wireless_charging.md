@@ -56,7 +56,13 @@ The inductive charger has some sort of microcontroller presumably to regulate ch
 
 <br/>
 
-![Broken charging chip](../../public/images/crazyflie_broken.jpg)
+![Broken charging chip](../../public/images/crazyflie_broken.jpg =400x)
+
+![Broken charging chip](../../public/images/crazyflie_broken.jpg){width=400}
+
+[[../../public/images/crazyflie_broken.jpg|width=400]]
+
+<img src="../../public/images/crazyflie_broken.jpg" width="400">
 
 <br/>
 
