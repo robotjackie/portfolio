@@ -62,11 +62,11 @@ I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-
 
 <br/>
 
-Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It uses the version of the OV7670+FIFO that has 22 pins. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "[Sources](#Sources)" below.
+Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It uses the version of the OV7670+FIFO that has 22 pins. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "[Sources](#sources)" below.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
 
-I also heavily leaned on code from a repo called Arduvision (see "[Sources](#Sources)" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "Pins" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
+I also heavily leaned on code from a repo called Arduvision (see "[Sources](#sources)" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "Pins" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
 Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her writeup. I also worked with my classmate [Athulya Simon](http://athulyasimon.github.io/project_portfolio/), who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car. I also had help from Spencer Williams debugging the SD card reader.
 
@@ -76,7 +76,7 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 ### Register Settings
 
-There are many registers for this camera, and many register functions have multiple registers and register values. A comprehensive list of each register and bit can be found in the datasheet listed in the "[Sources](#Sources)" section of this page. The hard way to change registers is to write functions to change a bit and mask the others; the easy way if you're using an Arduino is the write function from its Wire library (see examples from the book code in "[Sources](#Sources)"). In addition, libraries for the register settings can be found in the code from the book as well as some of the repos under "[Sources](#Sources)."
+There are many registers for this camera, and many register functions have multiple registers and register values. A comprehensive list of each register and bit can be found in the datasheet listed in the "[Sources](#sources)" section of this page. The hard way to change registers is to write functions to change a bit and mask the others; the easy way if you're using an Arduino is the write function from its Wire library (see examples from the book code in "[Sources](#sources)"). In addition, libraries for the register settings can be found in the code from the book as well as some of the repos under "[Sources](#sources)."
 
 Registers are read and set by the I2C data line (SDA), and the clock pulse to the camera is supplied on the I2C clock line (SCL).
 
@@ -122,7 +122,7 @@ In addition to setting the resolution, image format, and frames per second, the 
 
 - NightMode - not entirely sure how this works, but it allows the camera to work in low light conditions. Perhaps it changes the exposure and gain settings.
 
-- Demosaicing - processing the Raw Bayer image format into full color image (see below in "Image color formats")
+- Demosaicing - processing the Raw Bayer image format into full color image (see below in "[Image color formats](#image-color-formats)")
 
 - 50/60 Hz detection - Eliminate flickering in the camera's video from common fluorescent lights that run at 50 Hz, or monitors and screens that run at 60 Hz. Presumably the camera does this by dividing frame-rate or shutter speed by a constant to sync with the lighting pulse rate.
 
@@ -263,7 +263,7 @@ Finally, there is the Raw Bayer formats. The image sensor contains sensors in a 
 
 ### Libraries
 
-See "Sources" at bottom for different libraries with different microcontrollers.
+See "[Sources](#sources)" at bottom for different libraries with different microcontrollers.
 
 The main two that I used are from the book "Beginning OV7670 with Arduino," and the Arduvision library.
 
@@ -287,7 +287,7 @@ Luckily, the **light blob detection** from the Arduvision library **worked**. It
 
 <br/>
 
-However, the code from the "Beginning OV7670 with Arduino" book did not work well. There were many problems (listed below in "Challenges"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. 
+However, the code from the "Beginning OV7670 with Arduino" book did not work well. There were many problems (listed below in "[Challenges](#challenges)"). The program could only take 1 picture at a time and save it to an SD card; it was unable to stream video. I tried to modify the code to output a video stream to Serial but did not succeed. 
 
 Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) As you can see it is quite blurry. I tried manually changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library. I couldn't figure out why it didn't give me quality camera feed.
 

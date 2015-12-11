@@ -18,7 +18,7 @@ The microprocessor relies on Harmony, a system of libraries and drivers for diff
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_selfie.jpg" width="600"></center>
 
-However, we ran into trouble trying to combine the different parts. There were many errors, no debugger, and slow firmware upload time (see "Challenges"). 
+However, we ran into trouble trying to combine the different parts. There were many errors, no debugger, and slow firmware upload time (see "[Challenges](#challenges)"). 
 
 <br/>
 
@@ -28,7 +28,7 @@ The most helpful PDF we used is the one found under the Harmony install director
 
 The other useful PDF is [this one](http://ww1.microchip.com/downloads/en/DeviceDoc/50002027C.pdf). It talks about configuration files and other things to get it to run.
 
-As far as hardware goes, [this is the one needed when soldering.](http://ww1.microchip.com/downloads/en/DeviceDoc/70005148B.pdf) (see below in "Challenges").
+As far as hardware goes, [this is the one needed when soldering.](http://ww1.microchip.com/downloads/en/DeviceDoc/70005148B.pdf) (see below in "[Challenges](#challenges)").
 
 The demonstrations are all outlined in the Harmony PDF. The ones we used were *gfx_camera*, *tcpip_udp_client*, and *wifi_easy_configuration*. 
 
