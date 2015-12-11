@@ -2,7 +2,7 @@
 layout: project
 title: Haptics device research
 date: March 2015
-image: haptics.jpg
+image: haptics_50per.jpg
 ---
 
 ## Overview

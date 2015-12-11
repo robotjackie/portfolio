@@ -2,7 +2,7 @@
 layout: project
 title: Image Recognition and Classification App
 date: November 22, 2015
-image: image_recog1.jpg
+image: image_recog1_50per.jpg
 ---
 
 ## Overview

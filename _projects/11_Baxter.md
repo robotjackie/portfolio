@@ -2,7 +2,7 @@
 layout: project
 title: Baxter item sort
 date: December 13, 2014
-image: baxter_profile.jpg
+image: baxter_profile_50per.jpg
 ---
 
 ## Overview
