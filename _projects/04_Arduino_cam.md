@@ -25,21 +25,21 @@ The Omnivision OV7670 camera is a cheap, mobile-phone quality CMOS camera that i
 
 In the States, one can buy a PCB module for this camera for $8-25 on [Amazon](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dphoto&field-keywords=ov7670+fifo) that is is 3.5mm x 3.5mm x 3mm deep. The module comes in 2 forms: with a memory chip or without. It also comes in different form factors in the number of pins: 18, 20, 22, and 24 pins. This module breaks out and labels the camera's pins to male headers that can be soldered, or plugged into female/male ports for breadboarding. In addition, the module comes with a case that is much larger than the actual camera itself, with a removable camera cap. One can manually adjust the focus of the camera by screwing it left/right. 
 
-![](../../public/images/ov7670_with_cap.jpg)
+<center><img src="../../public/images/ov7670_with_cap.jpg" width="250"></center>
 
 To determine whether the OV7670 camera module has a memory chip or not, turn it over; the one with "FIFO" memory has a little horizontal memory chip (ALB422) on the back.
 
-![](../../public/images/ov7670_with_fifo.jpg)
+<center><img src="../../public/images/ov7670_with_fifo.jpg"  width="350"></center>
 
 ...while the OV7670 non-FIFO does not have it. 
 
-![](../../public/images/ov7670_non_fifo.jpg)
+<center><img src="../../public/images/ov7670_non_fifo.jpg" width="300"></center>
 
 The one with a memory chip (ALB422) has enough space to store 1 image in raw Bayer image format, at 1 byte/pixel (more on YUV image format below, under "Image color formats"). It can hold 384K bytes (while 640px * 480px * 1 byte/px = 307.2K bytes). The module then allows the image to be read from the memory chip off 8 parallel data pins. I believe more data from a higher quality image can be taken with the camera, but it can't be stored and must be read immediately or the data will be lost. 
 
 This camera module makes prototyping with the camera quite easy. But in the case of manufacturing, the bare camera often comes with "Golden Finger" connections for each pin. Without the bulky case of the module, the form factor for the actual camera is quite small:
 
-![](../../public/images/ov7670_golden_finger.jpg)
+<center><img src="../../public/images/ov7670_golden_finger.jpg" width="300"></center>
 
 
 ## Implementation
@@ -57,14 +57,14 @@ I tried various microcontrollers with the OV7670 with FIFO, including different 
 
 I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
 
-![](../../public/images/cheap_arduinos.jpg)
-![](../../public/images/cheap_arduinos1.jpg)
+<center><img src="../../public/images/cheap_arduinos.jpg" width="600"></center>
+<center><img src="../../public/images/cheap_arduinos1.jpg" width="600"></center>
 
 <br/>
 
 Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It uses the version of the OV7670+FIFO that has 22 pins. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "[Sources](#sources)" below.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
+<center><img src="../../public/images/beginning_ov7670_book.jpg" width="400"></center>
 
 I also heavily leaned on code from a repo called Arduvision (see "[Sources](#sources)" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "[Pins](#pins)" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
@@ -141,7 +141,7 @@ The next step in processing is that the analog signal is converted to a 10 bit d
 The image then goes into the FIFO memory buffer (L), which as explained above can store 1 VGA-resolution image at 1 byte/pixel in raw Bayer format, or lower resolution images at higher byte/pixel in other formats. Finally the image can be read out of the 8-pin video port (M) through pins D0-D7, at 1 bit/pin at a time, for a speed of 1 byte/read cycle from all the pins.
 
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_camera_components.png?raw=true" width="650"></center>
+<center><img src="../../public/images/ov7670_camera_components.png?raw=true" width="650"></center>
 
 
 ### Pins: 
@@ -201,7 +201,7 @@ Here is another example of pin connections, using the Arduino Mega 2560. This is
 
 Here, the Arduino Mega 2560 is also connected to an SD card reader by the SPI protocol. Different Arduinos have different dedicated pins for interfacing with SPI; on the Mega 2560 it was 51-MOSI, 50-MISO, 52-SCK, 53-SS (not shown in the image below).
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_mega_pins.jpg?raw=true" width="800"></center>
+<center><img src="../../public/images/ov7670_mega_pins.jpg?raw=true" width="800"></center>
 
 <br/>
 
@@ -259,7 +259,7 @@ The following function can convert YCbCr to RGB:
 
 Specifically, the OV7670 uses a YCbCr422 format. This is a strange format where 1 byte is given to Y, Cb, and Cr each, which makes it seem like each pixel is 3 bytes. But two consecutive pixels share the same Cb and Cr values. So for two pixels, there are only four values, Y1, Y2, Cb1, Cr1, which is 4 bytes per 2 pixels, or an average of 2 bytes/pixel. 
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/YCbCr_pixels.jpg?raw=true"></center>
+<center><img src="../../public/images/YCbCr_pixels.jpg?raw=true"></center>
 
 Finally, there is the Raw Bayer formats. The image sensor contains sensors in a BG/GR Bayer filter pattern, with blue and green filters alternating in one row, and green and red in the next. These filters only allow light of that wavelength in. That means that a pixel must fill in the 2 missing colors in an estimating process called "demosaicing" in order to have full color. This outputs the processed Bayer format.
 
@@ -277,14 +277,14 @@ At first I only got garbage. It looked like part of the image was being read and
 
 <br/>
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_garbage.png?raw=true" width="500"></center>
+<center><img src="../../public/images/ov7670_garbage.png?raw=true" width="500"></center>
 
 <br/>
 
 Luckily, the **light blob detection** from the Arduvision library **worked**. It refreshed at about 2-3 fps and displayed a light blob from lighting sources, such as the overhead light in the room or my mobile camera's flash, and it displayed dark blobs when the light sources were covered. For some reason everything had a green-ish tinge. 
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob1.png?raw=true" width="450">
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_lightblob2.png?raw=true" width="450">
+<center><img src="../../public/images/ov7670_lightblob1.png?raw=true" width="450">
+<img src="../../public/images/ov7670_lightblob2.png?raw=true" width="450">
 </center>
 
 <br/>
@@ -293,14 +293,14 @@ However, the code from the "Beginning OV7670 with Arduino" book did not work wel
 
 Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) As you can see it is quite blurry. I tried manually changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library. I couldn't figure out why it didn't give me quality camera feed.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA0.jpg" width="450">
-<img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/VGA1.jpg" width="450">
+<center><img src="../../public/images/VGA0.jpg" width="450">
+<img src="../../public/images/VGA1.jpg" width="450">
 </center>
 
 <br/>
 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/yuv.jpg" width="800"></center>
+<center><img src="../../public/images/yuv.jpg" width="800"></center>
 
 This was one of the blue images above, taken with the camera running the book code. It is a YUV-format image in QQVGA resolution that was saved to the SD card. It is 2400 lines. Each line has 8 "words," with each word a 4-digit hexadecimal. Since 1 hex character is half a byte, each 4-hex "word" is 2 bytes. 
 
@@ -329,7 +329,7 @@ The biggest difficulty was that while I could get light blob detection to work, 
 
   - Try with substituting the **500000** for **115200**.
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
+<center><img src="../../public/images/ov7670_SD_fail.png?raw=true" width="500"></center>
 
 - Some Arduinos are 3.3V while others are 5V. I thought I could use a 5V Arduino and just power the camera with the 3V3 pin. However, I2C on a 5V Arduino still uses 5V, and low from the Arduino can still pull the camera pins to high, or high from the camera can still be read as low to the Arduino. I used 4.7K pull-up resistors for this Arduino. 
 

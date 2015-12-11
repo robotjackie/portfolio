@@ -22,7 +22,7 @@ We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
 
-![](../../public/images/crazyflie_50per.jpg)
+<center> <img src="../../public/images/crazyflie_50per.jpg"> </center>
 
 <br/>
 
@@ -36,7 +36,7 @@ This was sold as the lightest camera + transmitter combo in the world by Chinese
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
 
-<center>![](../../public/images/palm_charger.jpg)</center>
+<center> <img src="../../public/images/palm_charger.jpg"> </center>
 
 
 ## Challenges
@@ -56,13 +56,7 @@ The inductive charger has some sort of microcontroller presumably to regulate ch
 
 <br/>
 
-![Broken charging chip](../../public/images/crazyflie_broken.jpg =400x)
-
-![Broken charging chip](../../public/images/crazyflie_broken.jpg){width=400}
-
-[[../../public/images/crazyflie_broken.jpg|width=400]]
-
-<img src="../../public/images/crazyflie_broken.jpg" width="400">
+<img src="../../public/images/crazyflie_broken.jpg" width="600">
 
 <br/>
 
