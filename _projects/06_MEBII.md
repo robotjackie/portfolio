@@ -52,7 +52,7 @@ Make sure the PIC version is PIC32MZ2048**ECH144**.
 
 ## PCB layouts
 
-We were optimistic that once we got the code running on the development board, we would design and print a complete PCB with just the parts we needed. Nurullah created Gerber files for socket boards of each component that we hoped to breadboard, but since we couldn't get the Harmony code to work, we didn't print them.
+We were optimistic that once we got the code running on the development board, we would design and print a complete PCB with just the parts we needed. Nurullah created [Gerber files for socket boards](#Gerber) of each component that we hoped to breadboard, but since we couldn't get the Harmony code to work, we didn't print them.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/gerber.jpg" width="750"></center>
 
@@ -74,6 +74,6 @@ We were optimistic that once we got the code running on the development board, w
 
 (1) [Our GitHub repo](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/jackie/firmware) with the PIC32MZ code
 
-(2) [GitHub](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/Nurullah's%20Socket%20Board%20Designs) link for our socket board designs
+(2) <a name="Gerber"></a> [GitHub](https://github.com/robotjackie/PIC32_FIRMWARE/tree/master/Nurullah's%20Socket%20Board%20Designs) link for our socket board designs
 
 (3) Microchip [MEB-II documentation](http://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=dm320005-2&utm_source=&utm_medium=MicroSolutions&utm_term=&utm_content=DevTools&utm_campaign=Multimedia+Expansion+Board+II)
