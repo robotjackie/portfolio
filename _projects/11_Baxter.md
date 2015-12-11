@@ -11,6 +11,6 @@ We used the Baxter robot and an Asus Xtion camera to pick up volumes with differ
 <center><iframe width="480" height="360" src="https://player.vimeo.com/video/114438212" frameborder="0"> </iframe></center>
 
 ### Details
-[GitHub repo](https://github.com/robotjackie/baxter_sort)
+[GitHub repo](https://github.com/robotjackie/baxter_sort) containing the project code
 
-Project links to [Athulya](http://athulyasimon.github.io/project_portfolio/), [Ritwik](www.ritwiku.com), [Sherif](https://www.linkedin.com/in/sherif-mostafa-564559104), [Austin](ablarry91.github.io/portfolio/)
+Project links to [Athulya](http://athulyasimon.github.io/project_portfolio/), [Ritwik](http://www.ritwiku.com), [Sherif](https://www.linkedin.com/in/sherif-mostafa-564559104), [Austin](http://ablarry91.github.io/portfolio/)
