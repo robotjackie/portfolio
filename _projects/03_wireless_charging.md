@@ -22,7 +22,7 @@ We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
 
-<center> <img src="../../public/images/crazyflie_50per.jpg"> </center>
+<img src="../../public/images/crazyflie_50per.jpg"> 
 
 <br/>
 
@@ -30,13 +30,13 @@ We did this project using the following equipment:
 
 This was sold as the lightest camera + transmitter combo in the world by Chinese manufacturers, with an odd camera resolution (something like PAL 720x576).
 
-<center><img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="300"></center>
+<img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="300">
 
 <br/>
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
 
-<center> <img src="../../public/images/palm_charger.jpg"> </center>
+<img src="../../public/images/palm_charger_50per.jpg">
 
 
 ## Challenges
