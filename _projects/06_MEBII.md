@@ -10,13 +10,13 @@ Branching off of the experience of using the PIC32MX in our Mechatronics class, 
 
 The folks at Arrow Electronics were nice enough to donate a **Multimedia Evaluation Board-II** (**MEB-II**) to us. This board comes pre-assembled with all the peripherals that we needed: the PIC32MZ microprocessor, OV7690 camera, a display, and a WiFi chip. It also has many other functions we did not use, such as an accelerometer, headphone/speaker jack, Bluetooth, and more. The project profile picture shows the MEB-II from the back, with the Microchip Starter Board attached. This is the front of the board, with a display screen.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/microchip_front.jpg" width="400"></center>
+<center><img src="../../public/images/microchip_front_25per.jpg" width="400"></center>
 
 ## Results
 
 The microprocessor relies on Harmony, a system of libraries and drivers for different peripherals. We were able to use its sample code to get each individual component of the MEB-II to work: display, camera, data packets sent over by the WiFi chip, Smart Config WiFi provisioning, TCP/IP-UDP, and Amazon Web Services server. Below is a "selfie" taken by the on-board camera:
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/meb_selfie.jpg" width="600"></center>
+<center><img src="../../public/images/meb_selfie_25per.jpg" width="600"></center>
 
 However, we ran into trouble trying to combine the different parts. There were many errors, no debugger, and slow firmware upload time (see "[Challenges](#challenges)"). 
 
@@ -54,7 +54,7 @@ Make sure the PIC version is PIC32MZ2048**ECH144**.
 
 We were optimistic that once we got the code running on the development board, we would design and print a complete PCB with just the parts we needed. Nurullah created [Gerber files for socket boards](#Gerber) of each component that we hoped to breadboard, but since we couldn't get the Harmony code to work, we didn't print them.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/gerber.jpg" width="750"></center>
+<center><img src="../../gerber_50per.jpg" width="750"></center>
 
 <br/>
 

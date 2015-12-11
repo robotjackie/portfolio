@@ -20,9 +20,9 @@ We then performed image classification by submitting an image to the Cloudsight 
 
 <br/>
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/image_recog1.jpg" width="800" alt="UI for the image comparison app"></center>
+<center><img src="../../public/images/image_recog1_50per.jpg" width="800" alt="UI for the image comparison app"></center>
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/image_recog3.jpg" width="800" alt="Output for closest image matching from image database"></center>
+<center><img src="../../public/images/image_recog3_50per.jpg" width="800" alt="Output for closest image matching from image database"></center>
 
 ## Challenges
 

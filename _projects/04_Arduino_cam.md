@@ -25,7 +25,7 @@ The Omnivision OV7670 camera is a cheap, mobile-phone quality CMOS camera that i
 
 In the States, one can buy a PCB module for this camera for $8-25 on [Amazon](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dphoto&field-keywords=ov7670+fifo) that is is 3.5mm x 3.5mm x 3mm deep. The module comes in 2 forms: with a memory chip or without. It also comes in different form factors in the number of pins: 18, 20, 22, and 24 pins. This module breaks out and labels the camera's pins to male headers that can be soldered, or plugged into female/male ports for breadboarding. In addition, the module comes with a case that is much larger than the actual camera itself, with a removable camera cap. One can manually adjust the focus of the camera by screwing it left/right. 
 
-<center><img src="../../public/images/ov7670_with_cap.jpg" width="250"></center>
+<center><img src="../../public/images/ov7670_with_cap_50per.jpg" width="250"></center>
 
 To determine whether the OV7670 camera module has a memory chip or not, turn it over; the one with "FIFO" memory has a little horizontal memory chip (ALB422) on the back.
 
@@ -57,8 +57,8 @@ I tried various microcontrollers with the OV7670 with FIFO, including different 
 
 I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
 
-<center><img src="../../public/images/cheap_arduinos.jpg" width="600"></center>
-<center><img src="../../public/images/cheap_arduinos1.jpg" width="600"></center>
+<center><img src="../../public/images/cheap_arduinos_25per.jpg" width="600"></center>
+<center><img src="../../public/images/cheap_arduinos1_25per.jpg" width="600"></center>
 
 <br/>
 
@@ -259,7 +259,7 @@ The following function can convert YCbCr to RGB:
 
 Specifically, the OV7670 uses a YCbCr422 format. This is a strange format where 1 byte is given to Y, Cb, and Cr each, which makes it seem like each pixel is 3 bytes. But two consecutive pixels share the same Cb and Cr values. So for two pixels, there are only four values, Y1, Y2, Cb1, Cr1, which is 4 bytes per 2 pixels, or an average of 2 bytes/pixel. 
 
-<center><img src="../../public/images/YCbCr_pixels.jpg?raw=true"></center>
+<center><img src="../../public/images/YCbCr_pixels.jpg"></center>
 
 Finally, there is the Raw Bayer formats. The image sensor contains sensors in a BG/GR Bayer filter pattern, with blue and green filters alternating in one row, and green and red in the next. These filters only allow light of that wavelength in. That means that a pixel must fill in the 2 missing colors in an estimating process called "demosaicing" in order to have full color. This outputs the processed Bayer format.
 
@@ -277,14 +277,14 @@ At first I only got garbage. It looked like part of the image was being read and
 
 <br/>
 
-<center><img src="../../public/images/ov7670_garbage.png?raw=true" width="500"></center>
+<center><img src="../../public/images/ov7670_garbage.png" width="500"></center>
 
 <br/>
 
 Luckily, the **light blob detection** from the Arduvision library **worked**. It refreshed at about 2-3 fps and displayed a light blob from lighting sources, such as the overhead light in the room or my mobile camera's flash, and it displayed dark blobs when the light sources were covered. For some reason everything had a green-ish tinge. 
 
-<center><img src="../../public/images/ov7670_lightblob1.png?raw=true" width="450">
-<img src="../../public/images/ov7670_lightblob2.png?raw=true" width="450">
+<center><img src="../../public/images/ov7670_lightblob1.png" width="450">
+<img src="../../public/images/ov7670_lightblob2.png" width="450">
 </center>
 
 <br/>
@@ -293,8 +293,8 @@ However, the code from the "Beginning OV7670 with Arduino" book did not work wel
 
 Below is the image quality from pictures taken with the book's code. (In the right image, the dark blob on the lefthand side of the image is me!) As you can see it is quite blurry. I tried manually changing the focus, with little impact. The gain and other register settings were similar to the Arduvision library. I couldn't figure out why it didn't give me quality camera feed.
 
-<center><img src="../../public/images/VGA0.jpg" width="450">
-<img src="../../public/images/VGA1.jpg" width="450">
+<center><img src="../../public/images/VGA0_25per.jpg" width="450">
+<img src="../../public/images/VGA1_25per.jpg" width="450">
 </center>
 
 <br/>

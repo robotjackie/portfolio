@@ -56,7 +56,7 @@ The inductive charger has some sort of microcontroller presumably to regulate ch
 
 <br/>
 
-<img src="../../public/images/crazyflie_broken.jpg" width="600">
+<img src="../../public/images/crazyflie_broken_25per.jpg" width="600">
 
 <br/>
 
