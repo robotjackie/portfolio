@@ -36,7 +36,7 @@ This was sold as the lightest camera + transmitter combo in the world by Chinese
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
 
-<img src="../../public/images/palm_charger_50per.jpg">
+<img src="../../public/images/palm_charger.jpg">
 
 
 ## Challenges
