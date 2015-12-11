@@ -18,7 +18,7 @@ We placed these motes in different parts of the house to simulate different cond
 
 <br/>
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/tiny_mote.jpg?raw=true" alt="Example of a TelosB mote" width="350"></center>
+![Example of a TelosB mote](../../public/images/tiny_mote.jpg)
 
 ## General Approach and Results
 The TelosB motes run on an "operating system" for low-powered, embedded devices called **TinyOS**. It has drivers and libraries for microcontrollers, sensors, timers, radio communication, and other integrated chips for different embedded devices. 

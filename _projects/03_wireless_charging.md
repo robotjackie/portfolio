@@ -10,19 +10,19 @@ This is a proof of concept of an automatically charging drone that can transmit 
 
 Current drones generally need a USB wire cable to charge, which requires a human to be connect it. But with inductive charging, humans could be anywhere in the world, and control the drone remotely, if the drone could fly itself back to the charging dock. 
 
-This proof of concept, of a rather simple principle that others have done before me, grew into a startup that I recently incorporated in 2015. My company is called [Eighty Nine Robotics, LLC](www.eightyninerobotics.com), and the mission is to put a drone in every home and in buildings around the world. 
+This proof of concept, of a rather simple principle that others have done before me, grew into a startup that I recently incorporated in 2015. My company is called [Eighty Nine Robotics, LLC](http://www.eightyninerobotics.com), and the mission is to put a drone in every home and in buildings around the world. 
 
 
 ## General Approach
 
-In order to get this to work, we wanted to do the minimum necessary to prove a concept, and not reinvent the wheel from scratch. My friend [Ritwik Ummalaneni](www.ritwiku.com) and I combined an off-the-shelf drone, controllable by PC, with a remote camera transmitter and an inductive charging unit. 
+In order to get this to work, we wanted to do the minimum necessary to prove a concept, and not reinvent the wheel from scratch. My friend [Ritwik Ummalaneni](http://www.ritwiku.com) and I combined an off-the-shelf drone, controllable by PC, with a remote camera transmitter and an inductive charging unit. 
 
 
 We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
 
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie.JPG?raw=true" width="400">
+![](../../public/images/crazyflie.JPG)
 
 <br/>
 
@@ -30,13 +30,13 @@ We did this project using the following equipment:
 
 This was sold as the lightest camera + transmitter combo in the world by Chinese manufacturers, with an odd camera resolution (something like PAL 720x576).
 
-<img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="300">
+<center><img src="http://www.fpvhobby.com/img/p/143-353-large.jpg" width="300"></center>
 
 <br/>
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
 
-<img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/palm_charger.jpg?raw=true" width="300">
+![](../../public/images/palm_charger.jpg)
 
 
 ## Challenges
@@ -56,7 +56,7 @@ The inductive charger has some sort of microcontroller presumably to regulate ch
 
 <br/>
 
-<center><img src="https://github.com/robotjackie/portfolio/blob/gh-pages/public/images/crazyflie_broken.jpg?raw=true" alt="Broken charging chip" width="400"></center>
+![Broken charging chip](../../public/images/crazyflie_broken.jpg)
 
 <br/>
 
