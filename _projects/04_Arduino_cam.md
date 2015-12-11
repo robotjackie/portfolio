@@ -62,11 +62,11 @@ I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-
 
 <br/>
 
-Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It uses the version of the OV7670+FIFO that has 22 pins. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "Sources" below.
+Fortunately, someone wrote an entire book on how to use the OV7670 + FIFO camera, with the Arduino Mega2560. This book can be bought on [Amazon](http://www.amazon.com/Beginning-Arduino-ov7670-Camera-Development/dp/1512357987) for ~$20. It uses the version of the OV7670+FIFO that has 22 pins. It contains a library for the register settings to make the camera work, explanation of its components and timing diagrams, tips for coding with the Arduino, as well as code for taking a picture and storing it in an SD card connected to the Arduino. The book's website is in "[Sources](#Sources)" below.
 
 <center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/beginning_ov7670_book.jpg" width="400"></center>
 
-I also heavily leaned on code from a repo called Arduvision (see "Sources" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "Pins" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
+I also heavily leaned on code from a repo called Arduvision (see "[Sources](#Sources)" below). It uses the version of the OV7670+FIFO that has 18 pins (the "missing" pins, in comparison to the 22 pins of the OV7670 from the book code, are not used anyway. More on that under "Pins" below). The code is supposed to read a live stream of the camera feed, send it over Serial USB to the computer, and, with code for an IDE called Processing, display light blob tracking as well as live video. The light blob tracking code worked but the live video and images did not.
 
 Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcontroller for finger detection, and she shared her writeup. I also worked with my classmate [Athulya Simon](http://athulyasimon.github.io/project_portfolio/), who tried to connect the OV7670 + FIFO camera with a PIC32MX, in order to drive a robotic car. I also had help from Spencer Williams debugging the SD card reader.
 
@@ -76,7 +76,7 @@ Lastly, Becca Friesen had worked with the non-FIFO camera on a PIC32MX microcont
 
 ### Register Settings
 
-There are many registers for this camera, and many register functions have multiple registers and register values. A comprehensive list of each register and bit can be found in the datasheet listed in the "Sources" section of this page. The hard way to change registers is to write functions to change a bit and mask the others; the easy way if you're using an Arduino is the write function from its Wire library (see examples from the book code in "Sources"). In addition, libraries for the register settings can be found in the code from the book as well as some of the repos under "Sources."
+There are many registers for this camera, and many register functions have multiple registers and register values. A comprehensive list of each register and bit can be found in the datasheet listed in the "[Sources](#Sources)" section of this page. The hard way to change registers is to write functions to change a bit and mask the others; the easy way if you're using an Arduino is the write function from its Wire library (see examples from the book code in "[Sources](#Sources)"). In addition, libraries for the register settings can be found in the code from the book as well as some of the repos under "[Sources](#Sources)."
 
 Registers are read and set by the I2C data line (SDA), and the clock pulse to the camera is supplied on the I2C clock line (SCL).
 
@@ -233,7 +233,7 @@ Here is how the timings work. Different pins must be brought to high or low to r
 
 <br/>
 
-<center><img src="http://www.electrodragon.com/w/images/5/5d/7670_sequence2.jpg" width="700"></center>
+<center><img src="http://3.bp.blogspot.com/-cjOYTMj4C4M/UA2kV-db8GI/AAAAAAAAAPs/rtCGSIGjOHo/s1600/vga.png" width="700"></center>
 
 <br/>
 
