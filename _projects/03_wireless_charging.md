@@ -22,7 +22,7 @@ We did this project using the following equipment:
 
 - the Bitcraze "Crazyflie" mini quadcopter
 
-![](../../public/images/crazyflie.JPG)
+![](../../public/images/crazyflie_50per.jpg)
 
 <br/>
 
@@ -36,7 +36,7 @@ This was sold as the lightest camera + transmitter combo in the world by Chinese
 
 - an inductive charger, and a charging coil stripped from a cheap phone that is compatible with the Palm charger
 
-![](../../public/images/palm_charger.jpg)
+<center>![](../../public/images/palm_charger.jpg)</center>
 
 
 ## Challenges

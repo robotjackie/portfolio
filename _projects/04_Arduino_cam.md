@@ -33,13 +33,13 @@ To determine whether the OV7670 camera module has a memory chip or not, turn it 
 
 ...while the OV7670 non-FIFO does not have it. 
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_non_fifo.jpg" width="300"></center>
+![](../../public/images/ov7670_non_fifo.jpg)
 
 The one with a memory chip (ALB422) has enough space to store 1 image in raw Bayer image format, at 1 byte/pixel (more on YUV image format below, under "Image color formats"). It can hold 384K bytes (while 640px * 480px * 1 byte/px = 307.2K bytes). The module then allows the image to be read from the memory chip off 8 parallel data pins. I believe more data from a higher quality image can be taken with the camera, but it can't be stored and must be read immediately or the data will be lost. 
 
 This camera module makes prototyping with the camera quite easy. But in the case of manufacturing, the bare camera often comes with "Golden Finger" connections for each pin. Without the bulky case of the module, the form factor for the actual camera is quite small:
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/ov7670_golden_finger.jpg" width="300"></center>
+![](../../public/images/ov7670_golden_finger.jpg)
 
 
 ## Implementation
@@ -57,8 +57,8 @@ I tried various microcontrollers with the OV7670 with FIFO, including different 
 
 I bought many of my Arduino clones from [ValueHobby](www.valuehobby.com/arduino-and-cnc.html), a warehouse/store near Chicago O'Hare Airport which sells very cheap Arduino clones and other electronic components from China in the $2-5 range. From Northwestern, ValueHobby is a 40 minute drive, and they offer standard ground shipping (probably 3 days). I couldn't wait so I drove there to pick up my parts the day I ordered them.
 
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos.jpg" width="600"></center>
-<center><img src="https://raw.githubusercontent.com/robotjackie/portfolio/gh-pages/public/images/cheap_arduinos1.jpg" width="600"></center>
+![](../../public/images/cheap_arduinos.jpg)
+![](../../public/images/cheap_arduinos1.jpg)
 
 <br/>
 
